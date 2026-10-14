@@ -1,6 +1,7 @@
 from homeassistant.components.number import NumberEntity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeassistant.helpers.restore_state import RestoreEntity
+from .entity_safety import SourceSafeEntity
 from .const import DOMAIN, DEVICE_ID, PLATFORM_NUMBER
 
 async def async_setup_entry(hass, entry, async_add_entities):
@@ -14,7 +15,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
         coordinator.data[PLATFORM_NUMBER][key]['_entity'] = entity  # speichere die entity im coordinator.data
     async_add_entities(entities)
 
-class EHSSentinelNumber(CoordinatorEntity, NumberEntity, RestoreEntity):
+class EHSSentinelNumber(SourceSafeEntity, CoordinatorEntity, NumberEntity, RestoreEntity):
     def update_value(self, valuedict):
         value = valuedict.get('value')
         nasa_name = valuedict.get('nasa_name')
@@ -64,7 +65,7 @@ class EHSSentinelNumber(CoordinatorEntity, NumberEntity, RestoreEntity):
     async def async_added_to_hass(self):
         await super().async_added_to_hass()
         last_state = await self.async_get_last_state()
-        if last_state:
+        if last_state and not self.coordinator.data.get(PLATFORM_NUMBER, {}).get(self._key, {}).get('seen_once'):
             # Schreibe den wiederhergestellten Wert in den Coordinator, damit er sofort verfügbar ist
             platform_data = self.coordinator.data.setdefault(PLATFORM_NUMBER, {})
             platform_data.setdefault(self._key, {})
@@ -82,8 +83,8 @@ class EHSSentinelNumber(CoordinatorEntity, NumberEntity, RestoreEntity):
             platform_data[self._key].update({
                 "value": state_val,
                 "nasa_name": self._nasa_name,
-                "seen_once": True,
-                **last_state.attributes  #  alle Attribute wieder übernehmen
+                "seen_once": False,
+                "nasa_last_seen": last_state.attributes.get('nasa_last_seen'),
             })
             # sofort im UI zeigen
             self.async_write_ha_state()
@@ -106,8 +107,7 @@ class EHSSentinelNumber(CoordinatorEntity, NumberEntity, RestoreEntity):
 
     @property
     def available(self):
-        data = self.coordinator.data.get(PLATFORM_NUMBER, {}).get(self._key, {})
-        return bool(data.get("seen_once", False))
+        return super().available
     
     @property
     def native_min_value(self) -> float:
@@ -131,17 +131,11 @@ class EHSSentinelNumber(CoordinatorEntity, NumberEntity, RestoreEntity):
     
     @property
     def extra_state_attributes(self):
-        attrs = {}
-        data = self.coordinator.data.get(PLATFORM_NUMBER, {}).get(self._key, {})
-        if "nasa_last_seen" in data:
-            attrs["nasa_last_seen"] = data["nasa_last_seen"]
-        if self._nasa_name:
-            attrs["nasa_name"] = self._nasa_name
-        return attrs
+        return super().extra_state_attributes
 
     async def async_set_native_value(self, value: float):
         # Hier Wert setzen (z.B. an Gerät senden)
-        await self.coordinator.producer.write_request(message=self._nasa_name, value=f"{value}", read_request_after=True)
+        await self.confirmed_write(value)
         # Optional: Wert lokal setzen, falls das Gerät nicht sofort zurückmeldet
         #self.coordinator.data[PLATFORM_NUMBER][self._key] = {"nasa_name": self._nasa_name, "value": value}
         self.async_write_ha_state()

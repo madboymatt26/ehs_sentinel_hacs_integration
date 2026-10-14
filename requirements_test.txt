@@ -1,0 +1,3 @@
+# Historical HA 2026.6.1 harness, isolated from the live-version harness.
+# The plugin owns all pytest/HA pins; never overlay a different HA version.
+pytest-homeassistant-custom-component==0.13.337

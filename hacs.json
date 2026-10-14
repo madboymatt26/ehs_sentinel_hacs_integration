@@ -1,8 +1,8 @@
 {
-  "name": "EHS Sentinel",
+  "name": "EHS Sentinel (Sunhaven maintained)",
   "content_in_root": false,
   "domains": ["ehs_sentinel"],
-  "country": "DE",
+  "country": ["DE", "GB"],
   "homeassistant": "2023.0.0",
   "iot_class": "local_polling",
   "render_readme": true

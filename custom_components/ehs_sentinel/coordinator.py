@@ -12,7 +12,9 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers import entity_registry as er
 
-from .message_processor import MessageProcessor
+from .message_processor import MessageProcessor, COP_MAP, DELTA_SOURCES
+from .freshness import SourceEvidence, DEFAULT_MAX_AGE
+from .nasa_packet import DataType
 from .message_producer import MessageProducer
 from .nasa_packet import NASAPacket, AddressClassEnum 
 from .const import DOMAIN, DEVICE_ID, PLATFORM_SENSOR, PLATFORM_NUMBER, PLATFORM_SWITCH, PLATFORM_BINARY_SENSOR, PLATFORM_SELECT, LEGACY_INSTANCE_NAME, CONF_NAMING_SCHEME, NAMING_SCHEME_LEGACY
@@ -69,12 +71,15 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
         self.outdoor_address = None
         self.force_refresh = config_dict['force_refresh']
         self.nasa_repo = nasa_repo
+        self.source_evidence = SourceEvidence()
+        self._freshness_unsub = None
         self.processor = MessageProcessor(hass, self)
         self.producer = MessageProducer(hass, self)
         self.running = True
         self.data = {}
         self._packet_logger = None
         self._data_lock = asyncio.Lock()
+        self._packet_processing_lock = asyncio.Lock()
         self._entity_adders = {}
         self._write_confirmations = {}
         self._read_confirmations = {}
@@ -153,16 +158,34 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
         async with self._stats_lock:
             self.stats[key] += value
 
-    def create_write_confirmation(self, msgname, value):
+    def expected_source(self, msgname):
+        meta = self.nasa_repo[msgname]
+        outdoor = meta.get('dest_address_class') == 'Outdoor' or (int(meta['address'], 16) & 0xF000) == 0x8000
+        address = (self.outdoor_address if outdoor
+                   else self.indoor_address)
+        return (address['class'], address['channel'], address['address']) if address else None
+
+    def create_write_confirmation(self, msgname, value, source=None):
         event = asyncio.Event()
-        self._write_confirmations[msgname] = {"event": event, "value": value}
+        clock, _ = SourceEvidence.clock()
+        self._write_confirmations[msgname] = {
+            "event": event, "value": value, "since": clock,
+            "epoch": self.source_evidence.epoch, "source": source or self.expected_source(msgname),
+        }
         return event
     
-    def confirm_write(self, msgname, value):
+    def _confirmation_matches(self, confirmation, receipt):
+        return bool(confirmation and receipt and self.source_evidence.connected
+                    and receipt['epoch'] == self.source_evidence.epoch == confirmation['epoch']
+                    and receipt['received'] >= confirmation['since']
+                    and receipt['source'] == confirmation['source']
+                    and receipt['data_type'] in (DataType.Resposne, DataType.Notification))
+
+    def confirm_write(self, msgname, value, receipt=None):
         event = self._write_confirmations.get(msgname, {}).get("event", None)
         event_value = self._write_confirmations.get(msgname, {}).get("value", None)
         
-        if event is not None and event_value is not None:
+        if event is not None and event_value is not None and self._confirmation_matches(self._write_confirmations[msgname], receipt):
             if event_value == value:
                 self._logger.info(f"Confirming write for {msgname} with value: {value}, target value was: {event_value}")
                 event.set()
@@ -170,14 +193,62 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
     
     def create_read_confirmation(self, msgname):
         event = asyncio.Event()
-        self._read_confirmations[msgname] = event
+        clock, _ = SourceEvidence.clock()
+        self._read_confirmations[msgname] = {
+            "event": event, "since": clock, "epoch": self.source_evidence.epoch,
+            "source": self.expected_source(msgname),
+        }
         return event
     
-    def confirm_read(self, msgname):
-        event = self._read_confirmations.get(msgname, None)
-        if event:
-            event.set()
+    def confirm_read(self, msgname, receipt=None):
+        confirmation = self._read_confirmations.get(msgname)
+        if self._confirmation_matches(confirmation, receipt):
+            confirmation['event'].set()
             del self._read_confirmations[msgname]
+
+    def message_max_age(self, name):
+        """FSVs follow their configured slow poll; operational inputs stay at 15 min."""
+        age = DEFAULT_MAX_AGE
+        if self.polling and '_FSV_' in name and isinstance(self.polling_yaml, dict):
+            for poller in self.polling_yaml.get('fetch_interval', []):
+                if poller.get('enable') and name in self.polling_yaml.get('groups', {}).get(poller['name'], []):
+                    age = max(age, 2 * self.parse_time_string(poller['schedule']) + 30)
+        return age
+
+    def _source_dependencies(self, name):
+        if name in COP_MAP:
+            return COP_MAP[name]
+        if name == 'NASA_EHSSENTINEL_HEAT_OUTPUT':
+            return ('LVAR_IN_GENERATED_POWER_LAST_MINUTE',)
+        if name == 'NASA_EHSSENTINEL_CURRENT_TARGET_FLOW_TEMP':
+            return ('NASA_INDOOR_OPMODE', 'NASA_POWER', 'NASA_POWER_ZONE2',
+                    'VAR_IN_TEMP_WATER_LAW_F', 'NASA_INDOOR_SETTEMP_WATEROUT',
+                    'VAR_IN_TEMP_WATER_OUTLET_TARGET_ZONE2_F')
+        for source, targets in DELTA_SOURCES.items():
+            if name in targets:
+                return (source, 'NASA_DHW_VALVE', 'ENUM_IN_FSV_3011')
+        if name in ('NASA_EHSSENTINEL_START_COUNTER', 'NASA_EHSSENTINEL_DEFROST_COUNTER'):
+            return ('NASA_OUTDOOR_OPERATION_STATUS',)
+        return ()
+
+    def is_message_fresh(self, name):
+        dependencies = self._source_dependencies(name)
+        if dependencies:
+            return all(self.is_message_fresh(key) for key in dependencies)
+        return self.source_evidence.fresh(name, self.message_max_age(name))
+
+    def set_transport(self, connected):
+        self.source_evidence.connect(connected)
+        self._write_confirmations.clear()
+        self._read_confirmations.clear()
+        self._publish_freshness()
+
+    def _publish_freshness(self, _now=None):
+        for items in self.data.values():
+            for value in items.values():
+                entity = value.get('_entity')
+                if entity is not None and entity.hass:
+                    entity.async_write_ha_state()
 
     def uses_legacy_naming(self) -> bool:
         config_entry = getattr(self, "config_entry", None)
@@ -216,7 +287,7 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
                 name = self.instance_name,
                 manufacturer = "echoDave",
                 model = "EHS Sentinel",
-                sw_version = "2.0.2",
+                sw_version = "2.0.3",
             )
 
         config_entry = getattr(self, "config_entry", None)
@@ -228,7 +299,7 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
             name = self.instance_name,
             manufacturer = "echoDave",
             model = "EHS Sentinel",
-            sw_version = "2.0.2",
+            sw_version = "2.0.3",
         )
     
     def register_entity_adder(self, category, adder):
@@ -257,9 +328,11 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
                             )
                     else:
                         # Wert direkt im Entity-Objekt aktualisieren
-                        if hasattr(entity, 'update_value'):
-                            entity.update_value(enriched_val_dict)
+                        # Merge before publication, including first live receipt.
                         self.data[category][key].update(enriched_val_dict)
+                        if hasattr(entity, 'update_value'):
+                            if entity.hass:
+                                entity.async_write_ha_state()
 
     async def _async_update_data(self):
         """Fetch data from source."""
@@ -270,6 +343,9 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
         self._logger.info("Starting EHS Sentinel Coordinator..")
         self._packet_logger = await self.setup_packet_logger()
         self._tcp_task = asyncio.create_task(self._tcp_loop())
+        from datetime import timedelta
+        from homeassistant.helpers.event import async_track_time_interval
+        self._freshness_unsub = async_track_time_interval(self.hass, self._publish_freshness, timedelta(seconds=15))
         if self.diagnostic_logs:
             try:
                 if self._diagnostic_task is None:
@@ -301,6 +377,8 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
     async def _close_tcp_writer(self):
         """Close the current TCP writer to immediately unblock pending reads."""
         writer = self._tcp_writer
+        if self.producer is not None:
+            self.producer.set_writer(None)
         if writer is None:
             return
 
@@ -334,6 +412,10 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
     async def stop(self):
         self._logger.info("Stopping EHS Sentinel Coordinator...")
         self.running = False
+        self.set_transport(False)
+        if self._freshness_unsub:
+            self._freshness_unsub()
+            self._freshness_unsub = None
 
         await self._close_tcp_writer()
         await self._abort_tcp_reader()
@@ -468,6 +550,7 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
                     except asyncio.CancelledError:
                         pass
             except (ConnectionRefusedError, ConnectionResetError, OSError) as e:
+                self.producer.set_writer(None)
                 self._logger.error(f"TCP connection failed or lost: {e}")
                 await asyncio.sleep(5)  # wait before reconnect
             except asyncio.CancelledError:
@@ -479,12 +562,15 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
                 self._tcp_write_task = None
                 break
             except Exception as e:
+                self.producer.set_writer(None)
                 self._logger.error(f"Unexpected error in TCP loop: {e}")
                 self._logger.error(traceback.format_exc())
                 await asyncio.sleep(5)
             finally:
                 # Always close the writer so we don't leak sockets or leave
                 # zombie clients on the bridge side.
+                if self.producer is not None:
+                    self.producer.set_writer(None)
                 if writer is not None:
                     try:
                         writer.close()
@@ -517,6 +603,11 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
                     if counter >= 60:
                         self._logger.warning("Auto-detection of Indoor/Outdoor Unit Addresses timed out after 60 seconds.")
                         break
+
+            if self.polling:
+                key = '_source_safety'
+                if key not in self._tcp_polling_tasks or self._tcp_polling_tasks[key].done():
+                    self._tcp_polling_tasks[key] = asyncio.create_task(self._poll_control_sources())
 
             if self.writemode:
                 await self.request_all_writable_entities() # Request all writable entities
@@ -559,6 +650,31 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
                 self._logger.error(traceback.format_exc())
         
         self._logger.info("Requesting all writable entities completed")
+
+    async def _poll_control_sources(self):
+        """Read-only refresh of inputs whose value can legitimately stay constant."""
+        names = [name for name in (
+            'VAR_IN_TEMP_WATER_LAW_TARGET_F', 'NASA_INDOOR_DHW_SET_TEMP',
+            'NASA_DHW_OPMODE', 'NASA_DHW_POWER', 'NASA_INDOOR_DHW_CURRENT_TEMP',
+            'NASA_DHW_VALVE', 'NASA_INDOOR_WATER_OUT_TEMP',
+            'NASA_OUTDOOR_OUT_TEMP', 'VAR_IN_FLOW_SENSOR_CALC',
+            'NASA_OUTDOOR_CONTROL_WATTMETER_ALL_UNIT',
+        ) if name in self.nasa_repo]
+        while self.running:
+            # An unavailable indoor register must not starve outdoor health
+            # reads, or an unexpected request error terminate this poller.
+            groups = {}
+            for name in names:
+                groups.setdefault(self.expected_source(name), []).append(name)
+            for group in groups.values():
+                try:
+                    if not await self.producer.read_request(group, retry_mode=True):
+                        self._logger.warning('Control-source refresh incomplete; retrying next cycle')
+                except asyncio.CancelledError:
+                    raise
+                except Exception:
+                    self._logger.exception('Control-source refresh failed; retrying next cycle')
+            await asyncio.sleep(300)
                     
     async def make_default_request_packet(self, poller):
         schedule_seconds = self.parse_time_string(poller['schedule'])
@@ -629,7 +745,11 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
                         if packet_size <= len(data):
                             await self._inc_stat("packets_read")
                             if current_byte == b'\x34':
-                                asyncio.create_task(self.process_buffer(data))
+                                received, timestamp = SourceEvidence.clock()
+                                asyncio.create_task(self.process_buffer(data, {
+                                    'received': received, 'timestamp': timestamp,
+                                    'epoch': self.source_evidence.epoch,
+                                }))
                             else:
                                 self._logger.debug("Packet does not end properly, skip it...")
 
@@ -651,13 +771,15 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
             #await asyncio.sleep(0.01)  # Short break to reduce CPU load
 
         self._logger.info("TCP connection closed, EHS Sentinel integration terminated")
+        if self.producer is not None:
+            self.producer.set_writer(None)
 
     async def _packet_worker(self):
         while self.running:
             try:
                 buffer = await self._packet_queue.get()
                 try:
-                    await asyncio.wait_for(self.process_packet(buffer), timeout=3)
+                    await asyncio.wait_for(self.process_packet(*buffer), timeout=3)
                 except asyncio.TimeoutError:
                     self._logger.warning("process_packet timeout, packet verworfen")
                 except Exception:
@@ -667,7 +789,7 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
             except asyncio.CancelledError:
                 break
 
-    async def process_buffer(self, buffer):
+    async def process_buffer(self, buffer, receipt):
         if buffer and len(buffer) > 14:
             for i in range(0, len(buffer)):
                 if buffer[i] == 0x32:
@@ -679,13 +801,22 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
                         if qsize >= EHS_PACKET_QUEUE_MAXSIZE:
                             self._logger.error("Packet-Queue voll, Packet verworfen!")
                             return 
-                        await self._packet_queue.put(buffer[i:])
+                        await self._packet_queue.put((buffer[i:], receipt))
                     else:
                         self._logger.debug(f"Packet too short, skip processing: {len(buffer)}")
                     break
 
-    async def process_packet(self, buffer):
+    async def process_packet(self, buffer, receipt):
+        # Derived calculations and final value publication must share the same
+        # packet order. Per-register clock checks alone cannot prevent an older
+        # worker publishing after a newer one while either awaits derived work.
+        async with self._packet_processing_lock:
+            await self._process_packet(buffer, receipt)
+
+    async def _process_packet(self, buffer, receipt):
         try:
+            if not self.source_evidence.connected or receipt['epoch'] != self.source_evidence.epoch:
+                return
             nasa_packet = NASAPacket()
             nasa_packet.parse(buffer)
             self._logger.debug(f"Received Packet: {nasa_packet}")
@@ -703,7 +834,13 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
                     )
 
                 # verarbeite die Nachricht
-                await self.processor.process_message(nasa_packet)
+                if nasa_packet.packet_data_type not in (DataType.Resposne, DataType.Notification):
+                    return  # Read/Request/ACK/NACK payloads are not observed device state.
+                receipt = {**receipt, 'source': (
+                    nasa_packet.packet_source_address_class.value,
+                    nasa_packet.packet_source_channel, nasa_packet.packet_source_address),
+                    'data_type': nasa_packet.packet_data_type}
+                await self.processor.process_message(nasa_packet, receipt)
                 
             elif self.extended_logging:
                 await self._inc_stat("packets_processed_not_indoor_outdoor")

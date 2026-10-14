@@ -52,11 +52,11 @@ class MessageProcessor:
         self._logger = coordinator._logger
         self.entities = {}
         self.value_store = {}
-        self.dhw_power_store = {'val': 'OFF', 'dt': datetime.now().isoformat()} 
+        self.dhw_power_store = {'val': 'OFF', 'dt': datetime.now().astimezone().isoformat()}
         self.set_mode = None
         self.last_dt = None
 
-    async def process_message(self, packet):
+    async def process_message(self, packet, receipt):
         for msg in packet.packet_messages:
             hexmsg = f"0x{msg.packet_message:04x}"
             msgname = self.search_nasa_table(hexmsg)
@@ -68,10 +68,14 @@ class MessageProcessor:
                     self._logger.error(f"Packet details: {packet}")
                     continue
                 self._logger.debug(f"Processing message {msgname} with value {msgvalue}")
-                await self.protocol_message(msgname, msgvalue)
+                if receipt['source'] != self.coordinator.expected_source(msgname):
+                    continue
+                if not self.coordinator.source_evidence.record(msgname, receipt['received'], receipt['epoch'], receipt['timestamp']):
+                    continue
+                await self.protocol_message(msgname, msgvalue, receipt)
 
-    async def protocol_message(self, msgname, msgvalue):
-        dt = datetime.now()
+    async def protocol_message(self, msgname, msgvalue, receipt=None):
+        dt = datetime.now().astimezone()
 
         if self.last_dt is not None:
             if datetime.fromisoformat(self.last_dt).date() < dt.date():
@@ -145,7 +149,9 @@ class MessageProcessor:
         payload = {"value": value, "nasa_name": msgname}
 
         # Füge nasa_last_seen hinzu, wenn force_refresh aktiviert ist
-        if self.coordinator.force_refresh or (msgname.startswith("NASA_EHSSENTINEL_") or 
+        if receipt:
+            payload["nasa_last_seen"] = receipt['timestamp']
+        elif self.coordinator.force_refresh or (msgname.startswith("NASA_EHSSENTINEL_") or
                                               msgname in ('LVAR_IN_MINUTES_ACTIVE', 'NASA_OUTDOOR_CONTROL_WATTMETER_ALL_UNIT_ACCUM', 'LVAR_IN_TOTAL_GENERATED_POWER', 'NASA_DHW_VALVE')):
             payload["nasa_last_seen"] = datetime.fromisoformat(dt).isoformat(timespec="seconds")
 
@@ -155,8 +161,9 @@ class MessageProcessor:
         )
 
         # Bestätige die Lese- und Schreibvorgänge
-        self.coordinator.confirm_write(msgname, msgvalue)
-        self.coordinator.confirm_read(msgname)
+        if receipt:
+            self.coordinator.confirm_write(msgname, msgvalue, receipt)
+            self.coordinator.confirm_read(msgname, receipt)
 
         self.value_store[msgname] = {'val': msgvalue, 'dt': dt}
         self.last_dt = dt
@@ -254,8 +261,8 @@ class MessageProcessor:
         if 'ENUM_IN_FSV_3011' not in self.value_store:
             return
 
-        old_dt = datetime.fromisoformat(old['dt'])
-        new_dt = datetime.fromisoformat(dt)
+        old_dt = datetime.fromisoformat(old['dt']).astimezone()
+        new_dt = datetime.fromisoformat(dt).astimezone()
         delta_time = (new_dt - old_dt).total_seconds()
         delta = round(msgvalue - old['val'], 2)
         if delta < 0 or delta_time <= 0:
@@ -279,7 +286,7 @@ class MessageProcessor:
             traceback.print_exc()
 
         ## Delta-Verteilung je nach Modus
-        mode_dt = datetime.fromisoformat(self.dhw_power_store['dt'])
+        mode_dt = datetime.fromisoformat(self.dhw_power_store['dt']).astimezone()
 
         # Verteilung für DHW/HEAT
         if self.set_mode is not None:
