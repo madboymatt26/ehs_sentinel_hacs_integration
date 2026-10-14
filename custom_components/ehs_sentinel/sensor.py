@@ -2,6 +2,7 @@ from homeassistant.components.sensor import SensorEntity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeassistant.helpers.restore_state import RestoreEntity
 from .const import DOMAIN, DEVICE_ID, PLATFORM_SENSOR
+from .entity_safety import SourceSafeEntity
 
 async def async_setup_entry(hass, entry, async_add_entities):
     coordinator = hass.data[DOMAIN][entry.entry_id]
@@ -14,7 +15,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
         coordinator.data[PLATFORM_SENSOR][key]['_entity'] = entity  # speichere die entity im coordinator.data
     async_add_entities(entities)
 
-class EHSSentinelSensor(CoordinatorEntity, SensorEntity, RestoreEntity):
+class EHSSentinelSensor(SourceSafeEntity, CoordinatorEntity, SensorEntity, RestoreEntity):
     def update_value(self, valuedict):
         value = valuedict.get('value')
         nasa_name = valuedict.get('nasa_name')
@@ -59,7 +60,7 @@ class EHSSentinelSensor(CoordinatorEntity, SensorEntity, RestoreEntity):
     async def async_added_to_hass(self):
         await super().async_added_to_hass()
         last_state = await self.async_get_last_state()
-        if last_state:
+        if last_state and not self.coordinator.data.get(PLATFORM_SENSOR, {}).get(self._key, {}).get('seen_once'):
             # Schreibe den wiederhergestellten Wert in den Coordinator, damit er sofort verfügbar ist
             platform_data = self.coordinator.data.setdefault(PLATFORM_SENSOR, {})
             platform_data.setdefault(self._key, {})
@@ -81,8 +82,8 @@ class EHSSentinelSensor(CoordinatorEntity, SensorEntity, RestoreEntity):
             platform_data[self._key].update({
                 "value": conv,
                 "nasa_name": self._nasa_name,
-                "seen_once": True,
-                **last_state.attributes  #  alle Attribute wieder übernehmen
+                "seen_once": False,
+                "nasa_last_seen": last_state.attributes.get('nasa_last_seen'),
             })
             # sofort im UI zeigen
             self.async_write_ha_state()
@@ -109,8 +110,7 @@ class EHSSentinelSensor(CoordinatorEntity, SensorEntity, RestoreEntity):
 
     @property
     def available(self):
-        data = self.coordinator.data.get(PLATFORM_SENSOR, {}).get(self._key, {})
-        return bool(data.get("seen_once", False))
+        return super().available
     
     @property
     def native_unit_of_measurement(self):
@@ -118,10 +118,4 @@ class EHSSentinelSensor(CoordinatorEntity, SensorEntity, RestoreEntity):
     
     @property
     def extra_state_attributes(self):
-        attrs = {}
-        data = self.coordinator.data.get(PLATFORM_SENSOR, {}).get(self._key, {})
-        if "nasa_last_seen" in data:
-            attrs["nasa_last_seen"] = data["nasa_last_seen"]
-        if self._nasa_name:
-            attrs["nasa_name"] = self._nasa_name
-        return attrs
+        return super().extra_state_attributes

@@ -1,0 +1,3 @@
+# Isolated live-platform compatibility harness; never overlay the older harness.
+# PyPI metadata for this plugin pins homeassistant==2026.9.4.
+pytest-homeassistant-custom-component==0.13.367

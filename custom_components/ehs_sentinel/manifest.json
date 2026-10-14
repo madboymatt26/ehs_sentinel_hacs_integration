@@ -1,12 +1,12 @@
 {
   "domain": "ehs_sentinel",
-  "name": "EHS Sentinel HACS Integration",
-  "version": "2.0.2",
-  "documentation": "https://github.com/echoDaveD/ehs_sentinel_hacs_integration",
+  "name": "EHS Sentinel (Sunhaven maintained)",
+  "version": "2.0.3",
+  "documentation": "https://github.com/madboymatt26/ehs_sentinel_hacs_integration",
   "requirements": ["pyserial", "aiofiles"],
-  "codeowners": ["@echoDaveD"],
+  "codeowners": ["@madboymatt26"],
   "integration_type": "device",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/echoDaveD/ehs_sentinel_hacs_integration/issues",
+  "issue_tracker": "https://github.com/madboymatt26/ehs_sentinel_hacs_integration/issues",
   "config_flow": true
 }

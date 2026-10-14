@@ -256,7 +256,7 @@ async def async_send_signal_service(call: ServiceCall):
 
     _LOGGER.info(f"Service Action Call: Send Message for {keys} with Value {values}")
 
-    await coordinator.producer.write_request(
+    confirmed = await coordinator.producer.write_request(
         message=keys,
         value=values,
         read_request_after=True,
@@ -269,6 +269,8 @@ async def async_send_signal_service(call: ServiceCall):
         packet_type=packet_type,
         data_type=data_type
     )
+    if not confirmed:
+        raise ServiceValidationError('EHS command not confirmed; device outcome is unknown')
 
 async def async_request_signal_service(call: ServiceCall):
     key = call.data.get("nasa_key")
@@ -276,10 +278,12 @@ async def async_request_signal_service(call: ServiceCall):
     
     _LOGGER.info(f"Service Action Call: Request Message {key}")
 
-    await coordinator.producer.read_request(
+    confirmed = await coordinator.producer.read_request(
         list_of_messages=[key],
         retry_mode=True
     )
+    if not confirmed:
+        raise ServiceValidationError('EHS read received no fresh device response')
 
 async def async_request_current_diagnostics(call: ServiceCall):
     coordinator = _resolve_coordinator_from_call(call)
@@ -355,11 +359,13 @@ async def async_import_fsv_file_service(call: ServiceCall) -> ServiceResponse:
             
             _LOGGER.info(f"FSV Key {key} from file {log_dir / file_name} is different from current value. Current: {value['old_value']}, Backup: {value['new_value']}. Restoring value.")
             
-            await coordinator.producer.write_request(
+            confirmed = await coordinator.producer.write_request(
                 message=key,
                 value=f"{value['new_value']}",
                 read_request_after=True
             )
+            if not confirmed:
+                raise ServiceValidationError(f'EHS import stopped: {key} was not confirmed; earlier fields may have changed')
         return {"status": "success", "message": f"Imported FSV File {log_dir / file_name}", "updated_entities": dict_to_update}
     else:
         _LOGGER.error(f"FSV File {log_dir / file_name} not found.")

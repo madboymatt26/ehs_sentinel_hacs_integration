@@ -1,5 +1,33 @@
 # 🌡️ EHS Sentinel – Home Assistant Integration
 
+## Sunhaven maintained fork
+
+Maintained branch: `sunhaven/main`. Upstream `main` is retained as a mirror of
+[echoDaveD's original project](https://github.com/echoDaveD/ehs_sentinel_hacs_integration).
+The original project, author attribution and license notice remain below/in
+the repository. Release **2.0.3** is a fork release, not an upstream release.
+
+This fork adds per-register/current-connection freshness, restore-safe
+availability, source-correlated confirmed writes, bounded transport handling,
+serialized requests/packet publication, and resilient read-only refresh of
+control/health fields. Read [the maintenance and migration guide](MAINTENANCE.md).
+Stable domain, unique IDs and config-entry naming are preserved. A timeout is
+an unknown physical outcome, not evidence that a command was not applied.
+
+HACS custom repository: `madboymatt26/ehs_sentinel_hacs_integration` (Integration).
+Use an approved **tagged release**, not a moving development branch. Do not
+install upstream and fork into the same domain concurrently. Migrating an
+existing installation needs a backup and a reviewed source-switch procedure;
+do not delete the HA integration/config entry or its entities to switch code.
+No HACS installation, automatic update or HA restart is authorized by this README.
+
+Upstream updates enter a review PR on `sunhaven/main`; never overwrite that
+branch with an upstream sync or auto-release untested merges. Tests exercise
+HA 2026.6.1 and HA 2026.9.4 in separate pinned environments. They use fake
+transports; they do not prove a physical heat-pump installation commissioned.
+
+The material below is upstream documentation, including its donation link.
+
 > 🔗 Connect your **Samsung EHS Sentinel** system to **Home Assistant**  
 > 📡 Real-time monitoring & control via RS485 (F1/F2)  
 > ⚡ Fast, asynchronous communication  
