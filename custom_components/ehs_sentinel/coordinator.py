@@ -8,6 +8,7 @@ import shutil
 from datetime import datetime
 import traceback
 
+from homeassistant.core import callback
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers import entity_registry as er
@@ -243,7 +244,9 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
         self._read_confirmations.clear()
         self._publish_freshness()
 
+    @callback
     def _publish_freshness(self, _now=None):
+        """Publish on HA's event loop, including interval job dispatch."""
         for items in self.data.values():
             for value in items.values():
                 entity = value.get('_entity')
@@ -287,7 +290,7 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
                 name = self.instance_name,
                 manufacturer = "echoDave",
                 model = "EHS Sentinel",
-                sw_version = "2.0.3",
+                sw_version = "2.0.4",
             )
 
         config_entry = getattr(self, "config_entry", None)
@@ -299,7 +302,7 @@ class EHSSentinelCoordinator(DataUpdateCoordinator):
             name = self.instance_name,
             manufacturer = "echoDave",
             model = "EHS Sentinel",
-            sw_version = "2.0.3",
+            sw_version = "2.0.4",
         )
     
     def register_entity_adder(self, category, adder):

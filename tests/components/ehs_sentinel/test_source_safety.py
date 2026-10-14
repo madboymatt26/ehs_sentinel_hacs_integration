@@ -1,14 +1,15 @@
 """Real EHS producer/coordinator, fake transport: no sockets or devices."""
 import asyncio
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+import threading
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 import yaml
 from homeassistant.core import State
 from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
-from pytest_homeassistant_custom_component.common import MockConfigEntry
+from pytest_homeassistant_custom_component.common import MockConfigEntry, async_fire_time_changed
 
 from custom_components.ehs_sentinel import async_send_signal_service, async_import_fsv_file_service
 from custom_components.ehs_sentinel.coordinator import EHSSentinelCoordinator
@@ -321,6 +322,45 @@ async def test_disconnect_publishes_unavailable_and_timer_detects_expiry(co):
         co.set_transport(False)
         assert not entity.available
         assert not entity.extra_state_attributes['source_fresh']
+
+
+async def test_real_freshness_timer_publishes_on_event_loop_and_unsubscribes(co):
+    """Exercise HA's real job dispatch, not a direct timer-method call."""
+    key = co.processor._normalize_name(CURVE)
+    entity = EHSSentinelNumber(co, key, nasa_name=CURVE)
+    entity.hass = co.hass
+    co.data['number'][key].update(seen_once=True, _entity=entity)
+    publications = []
+    loop_thread = threading.get_ident()
+
+    def publish():
+        publications.append((threading.get_ident(), entity.available))
+
+    async def idle():
+        await asyncio.Event().wait()
+
+    with (patch.object(co, 'setup_packet_logger', AsyncMock(return_value=None)),
+          patch.object(co, '_tcp_loop', idle),
+          patch.object(co, '_packet_worker', idle),
+          patch.object(entity, 'async_write_ha_state', publish)):
+        await co.start_ehs_sentinel()
+        try:
+            clock, stamp = SourceEvidence.clock()
+            co.source_evidence.receipts[CURVE] = (clock - 901, stamp)
+            async_fire_time_changed(co.hass, datetime.now(timezone.utc) + timedelta(seconds=16))
+            await co.hass.async_block_till_done(wait_background_tasks=True)
+            assert publications == [(loop_thread, False)]
+            publications.clear()
+            async_fire_time_changed(co.hass, datetime.now(timezone.utc) + timedelta(seconds=16))
+            await co.hass.async_block_till_done(wait_background_tasks=True)
+            assert publications == [(loop_thread, False)]
+        finally:
+            await co.stop()
+        publications.clear()
+        async_fire_time_changed(co.hass, datetime.now(timezone.utc) + timedelta(seconds=16))
+        await co.hass.async_block_till_done(wait_background_tasks=True)
+        assert publications == []
+        assert co._freshness_unsub is None
 
 
 async def test_packet_workers_do_not_publish_in_reverse_order(co):
