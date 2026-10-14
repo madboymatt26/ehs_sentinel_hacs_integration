@@ -12,6 +12,13 @@ upstream mirror. Version 2.0.3 adds receipt-based availability, strict command
 readback, transport/request/publication safety and recovery of periodic reads.
 It has no house configuration, secret material or live diagnostics.
 
+Version 2.0.4 corrects a live-discovered 2.0.3 interval-dispatch defect: the
+synchronous freshness publisher must be marked as a Home Assistant callback,
+otherwise the timer runs it in an executor thread. The regression now uses
+the real HA interval scheduler, verifies repeated event-loop publication and
+expiry, and verifies cancellation on unload. Do not deploy 2.0.3: its direct-call
+tests missed the timer dispatch error. No device command or policy is changed.
+
 There is deliberately no automatic semantic-release workflow. Create a PR,
 pass both isolated HA 2026.6.1 and HA 2026.9.4 regression environments, review
 and merge, then tag the exact tested commit `v<manifest version>`. Publish a
