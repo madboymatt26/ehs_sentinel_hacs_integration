@@ -85,7 +85,7 @@ async def test_receipt_clock_stays_live_but_does_not_duplicate_recorder_attribut
     stale = hass.states.get(entity.entity_id)
     assert stale.state == 'unavailable'
     assert json.loads(recorded(stale))['source_fresh'] is False
-    await component.async_reset()
+    await component.async_remove_entity(entity.entity_id)
 
 ROOT = Path(__file__).resolve().parents[3]
 CURVE = 'VAR_IN_TEMP_WATER_LAW_TARGET_F'
