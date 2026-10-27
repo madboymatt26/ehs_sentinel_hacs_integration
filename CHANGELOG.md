@@ -1,3 +1,36 @@
+## [2.1.2](https://github.com/echoDaveD/ehs_sentinel_hacs_integration/compare/v2.1.1...v2.1.2) (2026-10-18)
+
+
+### Bug Fixes
+
+* add handling for invalid raw values in message processing (for example: ffff for error_code1_outdoor) ([#75](https://github.com/echoDaveD/ehs_sentinel_hacs_integration/issues/75)) ([c21b817](https://github.com/echoDaveD/ehs_sentinel_hacs_integration/commit/c21b817cc500a3b6ad629d207fd45e584821175a))
+
+## [2.1.1](https://github.com/echoDaveD/ehs_sentinel_hacs_integration/compare/v2.1.0...v2.1.1) (2026-10-18)
+
+
+### Bug Fixes
+
+* enhance error logging for message processing (fixes [#69](https://github.com/echoDaveD/ehs_sentinel_hacs_integration/issues/69)) ([#74](https://github.com/echoDaveD/ehs_sentinel_hacs_integration/issues/74)) ([1cff9cb](https://github.com/echoDaveD/ehs_sentinel_hacs_integration/commit/1cff9cb3f1130b51414952d3540b1eaf1f5db87f))
+* add indoor/outdoor class discrimination on  error code 1 (fixes [#73](https://github.com/echoDaveD/ehs_sentinel_hacs_integration/issues/73)) ([#74](https://github.com/echoDaveD/ehs_sentinel_hacs_integration/issues/74)) ([1cff9cb](https://github.com/echoDaveD/ehs_sentinel_hacs_integration/commit/1cff9cb3f1130b51414952d3540b1eaf1f5db87f))
+
+# [2.1.0](https://github.com/echoDaveD/ehs_sentinel_hacs_integration/compare/v2.0.2...v2.1.0) (2026-10-17)
+
+
+### Features
+
+* disable unused entities by default and only process known entities closes [#65](https://github.com/echoDaveD/ehs_sentinel_hacs_integration/issues/65) ([b813d12](https://github.com/echoDaveD/ehs_sentinel_hacs_integration/commit/b813d12e5ead358d0edcf6fc04242168cb42955b)), closes [#67](https://github.com/echoDaveD/ehs_sentinel_hacs_integration/issues/67)
+Entities are now disabled by default and only enabled once they receive
+a value, which keeps the entity registry clean on first setup.
+The MessageProcessor now checks whether a message belongs to a known
+entity before processing it, and only confirms writes/reads otherwise.
+
+* feat(entities): disable unused entities by default until they receive a value closes #65
+* feat(polling): add polling YAML message handling and improve entity request logic
+* feat(polling): add error handling and defaults to polling YAML parsing
+* fix(select): add missing option for ENUM_IN_FSV_4051 value 3 = 70% fixes #67
+* fix(coordinator): remove unused entity disabling logic
+* fix(translations): update translations for known entity handling
+
 ## [2.0.2](https://github.com/echoDaveD/ehs_sentinel_hacs_integration/compare/v2.0.1...v2.0.2) (2026-10-04)
 
 

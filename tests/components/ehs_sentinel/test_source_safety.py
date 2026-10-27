@@ -479,3 +479,237 @@ async def test_control_refresh_honours_shutdown(co):
     with pytest.raises(asyncio.CancelledError):
         await co._poll_control_sources()
     assert co.producer.read_request.await_count == 1
+
+
+def test_existing_entry_keeps_all_entities_without_implicit_filter(co):
+    assert co.only_known_entities is False
+    assert co.should_process_nasa_name('ENUM_AD_MULTI_TENANT_NO')
+    key = co.processor._normalize_name('ENUM_AD_MULTI_TENANT_NO')
+    assert key in co.data['sensor']
+    # Preserve the original indoor fault identity; outdoor is an addition.
+    assert co.processor._normalize_name('NASA_ERROR_CODE1') in co.data['sensor']
+    assert co.processor.search_nasa_table('0x0202', 'Indoor') == 'NASA_ERROR_CODE1'
+    assert co.processor.search_nasa_table('0x0202', 'Outdoor') == 'NASA_ERROR_CODE1_OUTDOOR'
+    assert co.processor.search_nasa_table('0x0202', 'WiredRemote') is None
+
+
+def test_explicit_known_only_setup_keeps_heating_measurements(hass, co):
+    config = dict(ip='127.0.0.1', port=1234, name='Known only', write_mode=True,
+        polling=True, extended_logging=False, diagnostic_logs=False,
+        force_refresh=False, only_known_entities=True,
+        polling_yaml='fetch_interval: []\ngroups: {}')
+    filtered = EHSSentinelCoordinator(hass,
+        MockConfigEntry(domain='ehs_sentinel', title='Known only'), config, co.nasa_repo)
+    assert filtered.only_known_entities is True
+    assert filtered.processor._normalize_name('ENUM_AD_MULTI_TENANT_NO') not in filtered.data['sensor']
+    for name in ['NASA_INDOOR_DHW_CURRENT_TEMP', 'NASA_INDOOR_WATER_IN_TEMP',
+                 'NASA_INDOOR_WATER_OUT_TEMP', 'NASA_OUTDOOR_OUT_TEMP',
+                 'NASA_OUTDOOR_CONTROL_WATTMETER_ALL_UNIT']:
+        assert filtered.processor._normalize_name(name) in filtered.data['sensor']
+        assert filtered.should_process_nasa_name(name)
+    filtered.producer.writer = None
+
+
+async def test_added_fsv_pump_enum_decodes_without_command_or_identity_change(co):
+    name = 'ENUM_IN_FSV_4051'
+    value = await co.determine_value(bytes([3]), name, 0)
+    assert value == '70%'
+    assert '70%' in co.nasa_repo[name]['hass_opts']['platform']['options']
+    co.producer.writer.write.assert_not_called()
+
+
+@pytest.mark.parametrize('source,name,value', [
+    (AddressClassEnum.Indoor, 'NASA_ERROR_CODE1', 101),
+    (AddressClassEnum.Outdoor, 'NASA_ERROR_CODE1_OUTDOOR', 202),
+])
+async def test_fault_packets_route_to_separate_sources_with_fresh_receipts(co, source, name, value):
+    packet = co.producer._build_default_request_packet()
+    packet.set_packet_source_address_class(source)
+    packet.set_packet_source_channel(0)
+    packet.set_packet_source_address(1 if source == AddressClassEnum.Indoor else 0)
+    packet.set_packet_data_type(DataType.Notification)
+    packet.set_packet_messages([co.producer._build_message(name, value)])
+    await co.process_packet(packet.to_raw(), receipt(co, name))
+    assert co.is_message_fresh(name)
+    assert co.data['sensor'][co.processor._normalize_name(name)]['value'] == value
+    other = 'NASA_ERROR_CODE1' if source == AddressClassEnum.Outdoor else 'NASA_ERROR_CODE1_OUTDOOR'
+    assert not co.is_message_fresh(other)
+    assert co.producer.writer.write.call_count == 0
+
+
+async def test_invalid_outdoor_fault_is_not_value_freshness_or_ack(co):
+    name = 'NASA_ERROR_CODE1_OUTDOOR'
+    event = co.create_read_confirmation(name)
+    key = co.processor._normalize_name(name)
+    original = dict(co.data['sensor'][key])
+    packet = co.producer._build_default_request_packet()
+    packet.set_packet_source_address_class(AddressClassEnum.Outdoor)
+    packet.set_packet_source_channel(0)
+    packet.set_packet_source_address(0)
+    packet.set_packet_data_type(DataType.Resposne)
+    packet.set_packet_messages([co.producer._build_message(name, -1)])
+    await co.process_packet(packet.to_raw(), receipt(co, name))
+    assert not event.is_set()
+    assert not co.is_message_fresh(name)
+    assert co.data['sensor'][key] == original
+    co._read_confirmations.clear()
+
+
+@pytest.mark.parametrize('kind', ['missing', 'old', 'epoch', 'source', 'ack', 'valid'])
+async def test_filtered_entity_still_requires_valid_command_receipt(co, kind):
+    co.only_known_entities = True
+    co.nasa_repo[CURVE]['hass_opts']['known'] = False
+    event = co.create_write_confirmation(CURVE, 1)
+    info = receipt(co)
+    if kind == 'missing':
+        info = None
+    elif kind == 'old':
+        info['received'] = -1
+    elif kind == 'epoch':
+        info['epoch'] = -1
+    elif kind == 'source':
+        info['source'] = (16, 0, 0)
+    elif kind == 'ack':
+        info['data_type'] = DataType.Ack
+    original = dict(co.data['number'][co.processor._normalize_name(CURVE)])
+    await co.processor.protocol_message(CURVE, 1, info)
+    assert event.is_set() is (kind == 'valid')
+    assert co.data['number'][co.processor._normalize_name(CURVE)] == original
+    co._write_confirmations.clear()
+
+
+@pytest.mark.parametrize('raw', ['', '[', '[]', '42', 'groups: [bad]',
+    'groups: {FSV: 4}', 'groups: {FSV: [4]}', 'fetch_interval: 4',
+    'fetch_interval: [4]', 'fetch_interval: [{enable: true}]',
+    'fetch_interval: [{enable: true, name: fsv, schedule: 0s}]',
+    'fetch_interval: [{enable: true, name: fsv, schedule: bad}]'])
+def test_invalid_polling_yaml_is_bounded_and_does_not_change_write_mode(co, raw):
+    assert co._parse_polling_yaml(raw) == {}
+    assert co.writemode is True
+
+
+def test_null_polling_sections_normalize_to_safe_empty_shapes(co):
+    assert co._parse_polling_yaml('groups: null\nfetch_interval: null') == {
+        'groups': {}, 'fetch_interval': []}
+
+
+async def test_polling_off_does_not_request_configured_fsv_fields(co):
+    name = 'ENUM_IN_FSV_3011'
+    co.polling = False
+    co.polling_yaml = {'groups': {'FSV': [name]}, 'fetch_interval': []}
+    co.producer.read_request = AsyncMock(return_value=True)
+    await co.request_all_writable_entities()
+    requested = co.producer.read_request.await_args.args[0]
+    assert name not in requested
+    assert CURVE in requested
+    co.producer.writer.write.assert_not_called()
+
+
+@pytest.mark.parametrize('cls,platform,name', [
+    (EHSSentinelSensor, 'sensor', 'NASA_INDOOR_DHW_CURRENT_TEMP'),
+    (EHSSentinelNumber, 'number', DHW),
+    (EHSSentinelSelect, 'select', 'NASA_DHW_OPMODE'),
+    (EHSSentinelSwitch, 'switch', 'NASA_DHW_POWER'),
+    (EHSSentinelBinarySensor, 'binary_sensor', 'NASA_DHW_POWER'),
+])
+def test_first_value_enables_new_entity_default_without_changing_identity(co, cls, platform, name):
+    key = co.processor._normalize_name(name)
+    data = co.data.setdefault(platform, {}).setdefault(key, {})
+    data['seen_once'] = False
+    before = cls(co, key, nasa_name=name)
+    assert before.entity_registry_enabled_default is False
+    data['seen_once'] = True
+    after = cls(co, key, nasa_name=name)
+    assert after.entity_registry_enabled_default is True
+    assert after.unique_id == before.unique_id
+
+
+async def test_registry_filter_never_deletes_entries_or_enables_user_disabled(hass, co):
+    from homeassistant.helpers import entity_registry as er
+    from custom_components.ehs_sentinel import _sync_registry_entities_for_entry
+    co.config_entry.add_to_hass(hass)
+    registry = er.async_get(hass)
+    records = []
+    for unique, disabled in [('unknown', None), ('user', er.RegistryEntryDisabler.USER),
+                             ('unseen', er.RegistryEntryDisabler.INTEGRATION)]:
+        records.append(registry.async_get_or_create('sensor', 'ehs_sentinel', unique,
+            config_entry=co.config_entry, disabled_by=disabled))
+    co.only_known_entities = True
+    await _sync_registry_entities_for_entry(hass, co.config_entry, co)
+    for original in records:
+        assert registry.async_get(original.entity_id).disabled_by == original.disabled_by
+
+
+@pytest.mark.parametrize('disabled', [None, 'user', 'integration'])
+async def test_first_live_value_respects_registry_disable_owner(hass, co, disabled):
+    from homeassistant.helpers import entity_registry as er
+    co.config_entry.add_to_hass(hass)
+    name = 'NASA_INDOOR_DHW_CURRENT_TEMP'
+    key = co.processor._normalize_name(name)
+    entity = EHSSentinelSensor(co, key, nasa_name=name)
+    registry = er.async_get(hass)
+    record = registry.async_get_or_create('sensor', 'ehs_sentinel', entity.unique_id,
+        config_entry=co.config_entry,
+        disabled_by=er.RegistryEntryDisabler(disabled) if disabled else None)
+    entity.entity_id = record.entity_id
+    co.data['sensor'][key]['_entity'] = entity
+    adder = MagicMock()
+    co.register_entity_adder('sensor', adder, EHSSentinelSensor)
+    await co.processor.protocol_message(name, 45.0, receipt(co, name))
+    assert registry.async_get(record.entity_id).disabled_by == (
+        er.RegistryEntryDisabler.USER if disabled == 'user' else None)
+    assert adder.call_count == (1 if disabled == 'integration' else 0)
+    await co.processor.protocol_message(name, 46.0, receipt(co, name))
+    assert adder.call_count == (1 if disabled == 'integration' else 0)
+
+
+async def test_repeated_decode_errors_are_throttled_and_do_not_refresh(co, caplog):
+    packet = co.producer._build_default_request_packet()
+    packet.set_packet_source_address_class(AddressClassEnum.Indoor)
+    packet.set_packet_source_channel(0)
+    packet.set_packet_source_address(1)
+    packet.set_packet_data_type(DataType.Notification)
+    packet.set_packet_messages([co.producer._build_message(CURVE, 10)])
+    co.source_evidence.receipts.clear()
+    with patch.object(co, 'determine_value', AsyncMock(side_effect=ValueError('bad value'))):
+        for _ in range(11):
+            await co.process_packet(packet.to_raw(), receipt(co))
+    assert co.processor.determine_value_store[CURVE] == 11
+    assert len([r for r in caplog.records if 'Error determining value' in r.message]) == 2
+    assert not co.is_message_fresh(CURVE)
+
+
+async def test_real_entity_platform_enables_first_receipt_and_preserves_id(hass, co):
+    import logging
+    from homeassistant.helpers import entity_registry as er
+    from homeassistant.helpers.entity_platform import EntityPlatform
+    co.config_entry.add_to_hass(hass)
+    name = 'NASA_INDOOR_DHW_CURRENT_TEMP'
+    key = co.processor._normalize_name(name)
+    entity = EHSSentinelSensor(co, key, nasa_name=name)
+    co.data['sensor'][key]['_entity'] = entity
+    registry = er.async_get(hass)
+    record = registry.async_get_or_create('sensor', 'ehs_sentinel', entity.unique_id,
+        config_entry=co.config_entry, disabled_by=er.RegistryEntryDisabler.INTEGRATION)
+    component = EntityPlatform(hass=hass, logger=logging.getLogger(__name__),
+        domain='sensor', platform_name='ehs_sentinel', platform=None,
+        scan_interval=timedelta(seconds=30), entity_namespace=None)
+    component.config_entry = co.config_entry
+    await component.async_add_entities([entity])
+    assert entity.entity_id == record.entity_id
+    assert hass.states.get(record.entity_id) is None
+    def add(entities):
+        hass.async_create_task(component.async_add_entities(entities))
+    co.register_entity_adder('sensor', add, EHSSentinelSensor)
+    packet = co.producer._build_default_request_packet()
+    packet.set_packet_source_address_class(AddressClassEnum.Indoor)
+    packet.set_packet_source_channel(0)
+    packet.set_packet_source_address(1)
+    packet.set_packet_data_type(DataType.Notification)
+    packet.set_packet_messages([co.producer._build_message(name, 450)])
+    await co.process_packet(packet.to_raw(), receipt(co, name))
+    await hass.async_block_till_done()
+    assert registry.async_get(record.entity_id).disabled_by is None
+    assert hass.states.get(record.entity_id).state == '45.0'
+    assert hass.states.get(record.entity_id).attributes['source_fresh'] is True
+    await component.async_reset()

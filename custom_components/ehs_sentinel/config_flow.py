@@ -22,6 +22,7 @@ CONFIG_SCHEMA = vol.Schema({
                     vol.Required("skip_mqtt_test", default=False): bool,
                     vol.Required("force_refresh", default=False): bool,
                     vol.Required("diagnostic_logs", default=False): bool,
+                    vol.Required("only_known_entities", default=True): bool,
                 })
 
 async def test_connection(ip, port) -> bool:
@@ -32,9 +33,9 @@ async def test_connection(ip, port) -> bool:
         return True
     except Exception:
         return False
-    
+
 async def test_old_mqtt_device(hass) -> bool:
-    
+
     devregistry = device_registry.async_get(hass)
 
     for device_id, device_entry in devregistry.devices.items():
@@ -47,14 +48,14 @@ class EHSSentinelConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Config flow for EHS Sentinel."""
 
     VERSION = 2
-    
+
     async def async_step_user(self, user_input=None):
-        errors = {} 
-        
+        errors = {}
+
         if user_input is not None:
 
             await self.async_set_unique_id(f"{user_input['ip']}:{user_input['port']}")
-            self._abort_if_unique_id_configured()  
+            self._abort_if_unique_id_configured()
 
             ok = True
 
@@ -76,10 +77,11 @@ class EHSSentinelConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 self.port = user_input["port"]
                 self.polling = user_input["polling"]
                 self.polling_yaml = user_input["polling_yaml"]
-                self.write_mode = user_input["write_mode"]  
-                self.extended_logging = user_input["extended_logging"] 
+                self.write_mode = user_input["write_mode"]
+                self.extended_logging = user_input["extended_logging"]
                 self.force_refresh = user_input["force_refresh"]
                 self.diagnostic_logs = user_input["diagnostic_logs"]
+                self.only_known_entities = user_input["only_known_entities"]
 
                 return self.async_create_entry(
                     title=f"{self.name}",
@@ -95,9 +97,10 @@ class EHSSentinelConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                         "polling_yaml": self.polling_yaml,
                         "force_refresh": self.force_refresh,
                         "diagnostic_logs": self.diagnostic_logs,
+                        "only_known_entities": self.only_known_entities,
                     }
                 )
-            
+
         return self.async_show_form(
             step_id="user",
             data_schema=CONFIG_SCHEMA,
@@ -119,6 +122,10 @@ class EHSSentinelOptionsFlowHandler(config_entries.OptionsFlow):
         self._extended_logging = config_entry.options.get("extended_logging", config_entry.data.get("extended_logging", False))
         self._force_refresh = config_entry.options.get("force_refresh", config_entry.data.get("force_refresh", False))
         self._diagnostic_logs = config_entry.options.get("diagnostic_logs", config_entry.data.get("diagnostic_logs", False))
+        self._only_known_entities = config_entry.options.get(
+            "only_known_entities",
+            config_entry.data.get("only_known_entities", False),
+        )
 
     def _is_host_port_in_use(self, ip: str, port: int) -> bool:
         for entry in self.hass.config_entries.async_entries(DOMAIN):
@@ -140,6 +147,7 @@ class EHSSentinelOptionsFlowHandler(config_entries.OptionsFlow):
         polling_enabled = self._polling_enabled
         force_refresh = self._force_refresh
         diagnostic_logs = self._diagnostic_logs
+        only_known_entities = self._only_known_entities
         if user_input is not None:
             extended_logging = user_input.get("extended_logging", extended_logging)
             if user_input.get("reset_defaults"):
@@ -148,6 +156,7 @@ class EHSSentinelOptionsFlowHandler(config_entries.OptionsFlow):
                 polling_enabled = False
                 force_refresh = False
                 diagnostic_logs = False
+                only_known_entities = True
             else:
                 ip = user_input["ip"]
                 port = user_input["port"]
@@ -156,6 +165,7 @@ class EHSSentinelOptionsFlowHandler(config_entries.OptionsFlow):
                 polling_enabled = user_input["polling"]
                 force_refresh = user_input["force_refresh"]
                 diagnostic_logs = user_input["diagnostic_logs"]
+                only_known_entities = user_input["only_known_entities"]
             # YAML validieren
             try:
                 yaml.safe_load(polling_yaml)
@@ -188,6 +198,7 @@ class EHSSentinelOptionsFlowHandler(config_entries.OptionsFlow):
                         "extended_logging": extended_logging,
                         "force_refresh": force_refresh,
                         "diagnostic_logs": diagnostic_logs,
+                        "only_known_entities": only_known_entities,
                     }, new_data, f"{self._name}", new_unique_id)
 
         return self.async_show_form(
@@ -206,10 +217,11 @@ class EHSSentinelOptionsFlowHandler(config_entries.OptionsFlow):
                     vol.Required("extended_logging", default=extended_logging): bool,
                     vol.Required("force_refresh", default=force_refresh): bool,
                     vol.Required("diagnostic_logs", default=diagnostic_logs): bool,
+                    vol.Required("only_known_entities", default=only_known_entities): bool,
                 }),
             errors=errors,
         )
-    
+
     async def _update_and_reload(self, new_options: dict, new_data: dict, title: str, unique_id: str):
         self.hass.config_entries.async_update_entry(
             self.config_entry,
@@ -219,4 +231,4 @@ class EHSSentinelOptionsFlowHandler(config_entries.OptionsFlow):
         )
         await self.hass.config_entries.async_reload(self.config_entry.entry_id)
         return self.async_create_entry(title=title, data=new_options)
-    
+

@@ -55,18 +55,41 @@ class MessageProcessor:
         self.dhw_power_store = {'val': 'OFF', 'dt': datetime.now().astimezone().isoformat()}
         self.set_mode = None
         self.last_dt = None
+        self.determine_value_store = {}
 
     async def process_message(self, packet, receipt):
         for msg in packet.packet_messages:
             hexmsg = f"0x{msg.packet_message:04x}"
-            msgname = self.search_nasa_table(hexmsg)
+            msgname = self.search_nasa_table(
+                hexmsg,
+                packet.packet_source_address_class.name
+                if packet.packet_source_address_class is not None else None,
+            )
             if msgname is not None:
+                invalid_raw_values = self.coordinator.nasa_repo[msgname].get(
+                    'invalid_raw_values', []
+                )
+                if msg.packet_payload.hex().lower() in invalid_raw_values:
+                    self._logger.debug(
+                        "Ignoring invalid raw value for %s: raw=%s",
+                        msgname,
+                        msg.packet_payload.hex(),
+                    )
+                    continue
+
                 try:
                     msgvalue = await self.coordinator.determine_value(msg.packet_payload, msgname, msg.packet_message_type)
                 except Exception:
-                    self._logger.error(f"Error determining value for message {msgname} with payload {msg.packet_payload}")
-                    self._logger.error(f"Packet details: {packet}")
+                    if msgname in self.determine_value_store.keys():
+                        self.determine_value_store[msgname] += 1
+                        if self.determine_value_store[msgname] % 10 == 0:
+                            self._logger.warning(f"Error determining value for message {msgname} has occurred {self.determine_value_store[msgname]} times")
+                    else:
+                        self.determine_value_store[msgname] = 1
+                        self._logger.warning(f"Error determining value for message {msgname} with payload {msg.packet_payload}")
+                        self._logger.warning(f"Packet details: {packet}")
                     continue
+
                 self._logger.debug(f"Processing message {msgname} with value {msgvalue}")
                 if receipt['source'] != self.coordinator.expected_source(msgname):
                     continue
@@ -75,6 +98,14 @@ class MessageProcessor:
                 await self.protocol_message(msgname, msgvalue, receipt)
 
     async def protocol_message(self, msgname, msgvalue, receipt=None):
+        if not self.coordinator.should_process_nasa_name(msgname):
+            # Filtering publication must never turn an unproven packet into
+            # a command acknowledgement. Keep the fork's receipt validation.
+            if receipt:
+                self.coordinator.confirm_write(msgname, msgvalue, receipt)
+                self.coordinator.confirm_read(msgname, receipt)
+            return
+
         dt = datetime.now().astimezone()
 
         if self.last_dt is not None:
@@ -141,9 +172,9 @@ class MessageProcessor:
                 self._logger.error(f"Error handling SollVL for {msgname}: {e}")
                 traceback.print_exc()
 
-    
+
         ## Endgültige Verarbeitung: Normalisieren, im Coordinator aktualisieren und HA-Status aktualisieren
-        
+
         # Normalisiere den Wert, falls erforderlich
         value = self._normalize_value(msgvalue)
         payload = {"value": value, "nasa_name": msgname}
@@ -181,7 +212,7 @@ class MessageProcessor:
                 if msgname == key:
                     return msgvalue
                 return self.value_store.get(key, {}).get('val', fallback)
-            
+
             if str(nasa_opmode).upper() == 'AUTO':
                 vl_set = _stored_value('VAR_IN_TEMP_WATER_LAW_F', 0)
             elif str(nasa_opmode).upper() in ['HEAT', 'COOL']:
@@ -191,7 +222,7 @@ class MessageProcessor:
                     vl_set = _stored_value('VAR_IN_TEMP_WATER_OUTLET_TARGET_ZONE2_F', 0)
                 else:
                     vl_set = None
-            else: 
+            else:
                 vl_set = None
 
             if vl_set is not None:
@@ -210,7 +241,7 @@ class MessageProcessor:
             return round(heat_output / power_input, 3)
         return 0
 
-    
+
     def _update_mode(self, msgvalue, dt):
         if all(k in self.value_store for k in ['NASA_DHW_VALVE', 'ENUM_IN_FSV_3011']):
             tmpval = 'ON' if msgvalue == 'TANK' else 'OFF'
@@ -219,7 +250,7 @@ class MessageProcessor:
                     self._logger.info(f"Updating DHW/HEAT mode to {msgvalue} based on DHW_POWER change from {self.dhw_power_store.get('val')} to {msgvalue}")
                 self.dhw_power_store['val'] = tmpval
                 self.dhw_power_store['dt'] = dt
-    
+
     async def _handle_mode_delta(self, msgname, msgvalue, dt):
         # Initialisiere nur den betroffenen Key falls nötig
         if self.value_store.get(msgname, {}).get('val', None) is None:
@@ -237,8 +268,8 @@ class MessageProcessor:
                             }
                             if self.coordinator.extended_logging:
                                 self._logger.info(f"Initialized value store for {k} with value {sensor_data.get('value', None)} and timestamp {tmpDt}")
-                        else: 
-                            if self.coordinator.extended_logging:                  
+                        else:
+                            if self.coordinator.extended_logging:
                                 self._logger.info(f"Setting value for {k} to 0 because last seen date is not today.")
                             await self.protocol_message(k, 0) # Setze Tageswerte auf 0, wenn der letzte Stand von einem anderen Tag ist
                     else:
@@ -254,10 +285,10 @@ class MessageProcessor:
             self._logger.info(f"Handling mode delta for {msgname}. Old value: {old}, New value: {msgvalue}")
         if not old or old['val'] is None:
             return
-        
+
         if 'val' not in self.dhw_power_store:
             return
-        
+
         if 'ENUM_IN_FSV_3011' not in self.value_store:
             return
 
@@ -279,7 +310,7 @@ class MessageProcessor:
             self._logger.error(f"Error retrieving values for mode delta calculation: {e}")
             return
 
-        try:    
+        try:
             await self.protocol_message(daily, daily_val + delta)
         except Exception as e:
             self._logger.error(f"Error updating daily total for {daily}: {e}")
@@ -292,8 +323,8 @@ class MessageProcessor:
         if self.set_mode is not None:
             is_dhw = self.set_mode == 'DHW' # Wenn ein Modus manuell gesetzt wurde, verwende diesen für die Verteilung
         else:
-            is_dhw = self.dhw_power_store['val'] == 'ON' 
-        
+            is_dhw = self.dhw_power_store['val'] == 'ON'
+
         main_target, main_val, main_daily, main_daily_val = (
             (target_dhw, dhw_val, daily_dhw, daily_dhw_val) if is_dhw else (target_heat, heat_val, daily_heat, daily_heat_val)
         )
@@ -322,7 +353,7 @@ class MessageProcessor:
                 self._logger.info(f"Applying delta of {delta} to main target {main_target} with old value {main_val}")
             await self.protocol_message(main_target, round(main_val + delta, 2))
             await self.protocol_message(main_daily, round(main_daily_val + delta, 2))
-            
+
 
     async def _handle_operation_status(self, msgvalue):
         if 'NASA_OUTDOOR_OPERATION_STATUS' in self.value_store:
@@ -343,9 +374,9 @@ class MessageProcessor:
         ) or 0
         if current in [None, '', 'undefined']:
             current = 0
-        
+
         await self.protocol_message(counter_name, current + 1)
-    
+
     def _get_platform(self, msgname):
         opts = self.coordinator.nasa_repo[msgname]['hass_opts']
         if opts['writable'] and self.coordinator.writemode:
@@ -356,12 +387,18 @@ class MessageProcessor:
         if isinstance(value, float):
             return round(value, 2)
         return value
-    
-    def search_nasa_table(self, address):
+
+    def search_nasa_table(self, address, source_address_class=None):
+        fallback = None
         for key, value in self.coordinator.nasa_repo.items():
             if value['address'].lower() == address:
-                return key
-    
+                configured_source = value.get('source_address_class')
+                if configured_source == source_address_class:
+                    return key
+                if configured_source is None:
+                    fallback = key
+        return fallback
+
     def _normalize_name(self, name):
         prefix_to_remove = ['ENUM_', 'LVAR_', 'NASA_', 'VAR_']
         # remove unnecessary prefixes of name
@@ -377,7 +414,7 @@ class MessageProcessor:
             tmpname += name_parts[i].capitalize()
 
         return tmpname
-    
+
     async def development_tool(self, tool_name):
         if tool_name == "set_mode_heat":
             self.set_mode = 'HEAT'
@@ -389,13 +426,13 @@ class MessageProcessor:
             self.set_mode = None
             self._logger.info(f"Disabled DHW/HEAT mode tracking")
         elif tool_name == "reset_daily_counters" or tool_name == "reset_all_counters":
-            await self.protocol_message("NASA_EHSSENTINEL_DAILY_MINUTES_ACTIVE_DHW_MODE", 0) 
+            await self.protocol_message("NASA_EHSSENTINEL_DAILY_MINUTES_ACTIVE_DHW_MODE", 0)
             await self.protocol_message("NASA_EHSSENTINEL_DAILY_MINUTES_ACTIVE_HEAT_MODE", 0)
-            await self.protocol_message("NASA_EHSSENTINEL_DAILY_MINUTES_ACTIVE", 0) 
+            await self.protocol_message("NASA_EHSSENTINEL_DAILY_MINUTES_ACTIVE", 0)
             await self.protocol_message("NASA_EHSSENTINEL_DAILY_CONSUMED_POWER_DHW_MODE", 0)
-            await self.protocol_message("NASA_EHSSENTINEL_DAILY_CONSUMED_POWER_HEAT_MODE", 0) 
+            await self.protocol_message("NASA_EHSSENTINEL_DAILY_CONSUMED_POWER_HEAT_MODE", 0)
             await self.protocol_message("NASA_EHSSENTINEL_DAILY_CONSUMED_POWER", 0)
-            await self.protocol_message("NASA_EHSSENTINEL_DAILY_GENERATED_POWER_DHW_MODE", 0) 
+            await self.protocol_message("NASA_EHSSENTINEL_DAILY_GENERATED_POWER_DHW_MODE", 0)
             await self.protocol_message("NASA_EHSSENTINEL_DAILY_GENERATED_POWER_HEAT_MODE", 0)
             await self.protocol_message("NASA_EHSSENTINEL_DAILY_GENERATED_POWER", 0)
             await self.protocol_message("NASA_EHSSENTINEL_DAILY_COP_DHW_MODE", 0)
@@ -406,7 +443,7 @@ class MessageProcessor:
             if tool_name == "reset_all_counters":
                 await self.protocol_message("NASA_EHSSENTINEL_TOTAL_MINUTES_ACTIVE_DHW_MODE", 0)
                 await self.protocol_message("NASA_EHSSENTINEL_TOTAL_MINUTES_ACTIVE_HEAT_MODE", 0)
-                await self.protocol_message("NASA_EHSSENTINEL_TOTAL_CONSUMED_POWER_DHW_MODE", 0) 
+                await self.protocol_message("NASA_EHSSENTINEL_TOTAL_CONSUMED_POWER_DHW_MODE", 0)
                 await self.protocol_message("NASA_EHSSENTINEL_TOTAL_CONSUMED_POWER_HEAT_MODE", 0)
                 await self.protocol_message("NASA_EHSSENTINEL_TOTAL_GENERATED_POWER_DHW_MODE", 0)
                 await self.protocol_message("NASA_EHSSENTINEL_TOTAL_GENERATED_POWER_HEAT_MODE", 0)

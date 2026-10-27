@@ -27,6 +27,19 @@ baseline and tests. Never move a release tag or auto-deploy a moving branch.
 
 ## Taking upstream updates
 
+The 2.1.3 candidate normally merges upstream v2.1.2 (95d1428), including
+2.1.0 known-entity/polling improvements and 2.1.1/2.1.2 fault handling. It retains
+the fork's receipt-correlated acknowledgements, event-loop freshness timer and
+recorder/statistics changes. Existing entries missing `only_known_entities`
+default to False; new setup defaults to True. Filtering is opt-in for upgrades,
+does not delete registry entries and never re-enables user-disabled entities.
+First valid values enable only integration-disabled entries. The legacy
+`NASA_ERROR_CODE1` indoor identity stays; `NASA_ERROR_CODE1_OUTDOOR` is additive,
+with source-class routing before freshness validation. Invalid `ffff` outdoor
+payloads cannot refresh availability, publish a fault or acknowledge a request.
+Malformed nested polling configuration is rejected before starting a poll loop.
+This candidate requires dual-version CI and review before release/installation.
+
 Version 2.0.5 retains per-register receipt clocks live, but declares only
 `nasa_last_seen` unrecorded using Home Assistant's supported entity metadata.
 This allows recorder attribute deduplication while keeping actual values,

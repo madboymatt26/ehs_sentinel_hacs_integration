@@ -2,6 +2,7 @@ ENUM_AD_MULTI_TENANT_NO:
   address: '0x0025'
   description: WiFi Kit Multi Tenant No.
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -16,6 +17,7 @@ ENUM_IN_2WAY_VALVE:
     2: Zone 1 ON
     3: OFF
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -33,6 +35,7 @@ ENUM_IN_3WAY_VALVE_2:
     0: ROOM
     1: TANK
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -49,6 +52,7 @@ ENUM_IN_BACKUP_HEATER:
     1: STEP 1
     2: STEP 2
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -66,6 +70,7 @@ ENUM_IN_BOOSTER_HEATER:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -80,6 +85,7 @@ ENUM_IN_CHILLER_EXT_WATER_OUT_INPUT:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -103,6 +109,7 @@ ENUM_IN_CHILLER_SETTING_DEMAND_LEVEL:
     10: 50 %
     11: Not Apply
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -127,6 +134,7 @@ ENUM_IN_CHILLER_WATERLAW_ON_OFF:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -141,6 +149,7 @@ ENUM_IN_CHILLER_WATERLAW_SENSOR:
     0: OUTDOOR
     1: ROOM
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -157,6 +166,7 @@ ENUM_IN_CHILLLER_SETTING_SILENT_LEVEL:
     2: LEVEL 2
     3: LEVEL 3
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -174,6 +184,7 @@ ENUM_IN_DIFFUSER_OPERATION_POWER:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -187,6 +198,7 @@ ENUM_IN_ENTER_ROOM_CONTROL_USED:
     0: DISABLE
     1: ENABLE
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -201,6 +213,7 @@ ENUM_IN_ENTHALPY_CONTROL_STATE:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -214,6 +227,7 @@ ENUM_IN_ERROR_HISTORY_CLEAR_FOR_HASS:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -241,6 +255,7 @@ ENUM_IN_FAN_MODE_REAL:
     19: NATURALHIGH
     254: 'OFF'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -269,6 +284,7 @@ ENUM_IN_FSV_2041:
     1: Floor
     2: FCU
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -285,6 +301,7 @@ ENUM_IN_FSV_2081:
     1: Floor
     2: FCU
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -303,6 +320,7 @@ ENUM_IN_FSV_2091:
     3: three
     4: four
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -324,6 +342,7 @@ ENUM_IN_FSV_2092:
     3: three
     4: four
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -345,6 +364,7 @@ ENUM_IN_FSV_2093:
     3: 'On'
     4: Repeat 3min On/7min Off by Room Sensor or WL
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -366,6 +386,7 @@ ENUM_IN_FSV_2094:
     4: four
     255: 'off'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -386,6 +407,7 @@ ENUM_IN_FSV_3011:
     1: one
     2: two
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -402,6 +424,7 @@ ENUM_IN_FSV_3031:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -417,6 +440,7 @@ ENUM_IN_FSV_3041:
     1: 'ON'
   description: DHW - Disinfection Application
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -438,6 +462,7 @@ ENUM_IN_FSV_3042:
     6: Saturday
     7: Everyday
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -460,6 +485,7 @@ ENUM_IN_FSV_3051:
     0: 'No'
     1: 'Yes'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -477,6 +503,7 @@ ENUM_IN_FSV_3061:
     2: two
     3: three
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -494,6 +521,7 @@ ENUM_IN_FSV_3071:
     0: Room
     1: Tank
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -509,6 +537,7 @@ ENUM_IN_FSV_4011:
     0: DHW
     1: Heating
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -525,6 +554,7 @@ ENUM_IN_FSV_4021:
     1: 2 Step BUH1+BUH2
     2: 1 Step BUH2
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -542,6 +572,7 @@ ENUM_IN_FSV_4022:
     1: BUH
     2: BSH
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -558,6 +589,7 @@ ENUM_IN_FSV_4023:
     0: 'No'
     1: 'Yes'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -573,6 +605,7 @@ ENUM_IN_FSV_4031:
     0: 'No'
     1: 'Yes'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -588,6 +621,7 @@ ENUM_IN_FSV_4032:
     0: 'No'
     1: 'Yes'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -604,6 +638,7 @@ ENUM_IN_FSV_4041:
     1: FSV_TARGET_DELTA
     2: WL
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -623,6 +658,7 @@ ENUM_IN_FSV_4044:
     4: '4'
     5: '5'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -641,12 +677,15 @@ ENUM_IN_FSV_4051:
     0: 'No'
     1: 100%
     2: 70%
+    3: 70%
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
       - 'No'
       - 100%
+      - 70%
       - 70%
       type: select
     writable: true
@@ -659,6 +698,7 @@ ENUM_IN_FSV_4053:
     2: '2'
     3: '3'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -675,6 +715,7 @@ ENUM_IN_FSV_4061:
     0: 'No'
     1: 'Yes'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -690,6 +731,7 @@ ENUM_IN_FSV_5022:
     1: 'ON'
   description: DHW Saving - DHW Saving Mode
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -705,6 +747,7 @@ ENUM_IN_FSV_5033:
     1: DHW
     255: TDM not Installed
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -721,6 +764,7 @@ ENUM_IN_FSV_5041:
     0: 'No'
     1: 'Yes'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -738,6 +782,7 @@ ENUM_IN_FSV_5042:
     2: COMP_OFF_BUH_OFF_BSH_PER
     3: COMP_OFF_BUH_OFF_BSH_OFF
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -755,6 +800,7 @@ ENUM_IN_FSV_5043:
     0: Low
     1: High
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -770,6 +816,7 @@ ENUM_IN_FSV_5051:
     0: Disable
     1: Use
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -790,6 +837,7 @@ ENUM_IN_FSV_5061:
     6: '6'
     7: '7'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -810,6 +858,7 @@ ENUM_IN_FSV_5081:
     0: 'No'
     1: 'Yes'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -825,6 +874,7 @@ ENUM_IN_FSV_5091:
     0: 'No'
     1: 'Yes'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -840,6 +890,7 @@ ENUM_IN_FSV_5094:
     0: "55\xB0 by HP"
     1: "70\xB0 by HP and BSH"
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -854,6 +905,7 @@ ENUM_IN_FSV_LOAD_SAVE:
     0: min
     1: max
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -866,6 +918,7 @@ ENUM_IN_FSV_LOAD_SAVE:
 ENUM_IN_GAS_LEVEL:
   address: '0x4147'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -920,6 +973,7 @@ ENUM_IN_LOUVER_HL_PART_SWING:
     105: M_V_V
     106: V_V_V
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -975,6 +1029,7 @@ ENUM_IN_MTFC:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -988,6 +1043,7 @@ ENUM_IN_OPERATION_POWER_ZONE1:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1002,6 +1058,7 @@ NASA_POWER_ZONE2:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -1019,6 +1076,7 @@ ENUM_IN_PV_CONTACT_STATE:
     1: 'ON'
     255: DISABLED
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -1034,6 +1092,7 @@ ENUM_IN_QUIET_MODE:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1047,6 +1106,7 @@ ENUM_IN_ROOM_TEMP_SENSOR:
     0: Idiom_IndoorUnit
     1: Idiom_WiredRemocon
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -1062,6 +1122,7 @@ ENUM_IN_ROOM_TEMP_SENSOR_ZONE2:
     0: Idiom_IndoorUnit
     1: Idiom_WiredRemocon
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -1079,6 +1140,7 @@ ENUM_IN_SG_READY_MODE_STATE:
     1: 'ON'
     2: ACTIVE
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -1095,6 +1157,7 @@ ENUM_IN_STATE_AUTO_STATIC_PRESSURE_RUNNING:
     1: Complete
     2: Running
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -1110,6 +1173,7 @@ ENUM_IN_STATE_FLOW_CHECK:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1124,6 +1188,7 @@ ENUM_IN_STATE_THERMO:
     1: 'ON'
   description: Thermo On/Off
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1139,6 +1204,7 @@ ENUM_IN_STATE_WATER_PUMP:
     1: 'ON'
   description: Water pump
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1153,6 +1219,7 @@ ENUM_IN_TDM_INDOOR_TYPE:
     0: A2A
     1: A2W
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -1169,6 +1236,7 @@ ENUM_IN_THERMOSTAT1:
     1: Cool
     2: Heat
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -1187,6 +1255,7 @@ ENUM_IN_THERMOSTAT2:
     1: Cool
     2: Heat
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -1201,6 +1270,7 @@ ENUM_IN_THERMOSTAT_WATER_HEATER:
   address: '0x40C5'
   description: Hydro_WaterHeaterThermostat
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -1211,6 +1281,7 @@ ENUM_IN_WATERPUMP_PWM_VALUE:
   address: '0x40C4'
   description: Water pump speed
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -1227,6 +1298,7 @@ ENUM_IN_WATER_VALVE_1_ON_OFF:
     1: 'ON'
   description: FCU Kit
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1240,6 +1312,7 @@ ENUM_IN_WATER_VALVE_2_ON_OFF:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1260,6 +1333,7 @@ ENUM_OUT_CHECK_REF_RESULT:
     6: Judgment_Not_Possible
     7: Temperature_Range_Exceeded
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -1278,6 +1352,7 @@ ENUM_OUT_CONTROL_FAN_NUM:
   address: '0x8099'
   description: Number of outdoor fans
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1292,6 +1367,7 @@ ENUM_OUT_EHS_WATEROUT_TYPE:
     1: 70 °C
     2: 75 °C
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -1308,6 +1384,7 @@ ENUM_OUT_INSTALL_ODU_COUNT:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1322,6 +1399,7 @@ ENUM_OUT_LOAD_A2A_VALVE:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1335,6 +1413,7 @@ ENUM_OUT_LOAD_OIL_BYPASS1:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1348,6 +1427,7 @@ ENUM_OUT_LOAD_OIL_BYPASS2:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1361,6 +1441,7 @@ ENUM_OUT_LOAD_PHEHEATER:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1375,6 +1456,7 @@ ENUM_OUT_MCU_LOAD_COOL_A:
     1: 'ON'
   description: MCU
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1388,6 +1470,7 @@ ENUM_OUT_MCU_LOAD_COOL_B:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1401,6 +1484,7 @@ ENUM_OUT_MCU_LOAD_COOL_C:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1414,6 +1498,7 @@ ENUM_OUT_MCU_LOAD_COOL_D:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1427,6 +1512,7 @@ ENUM_OUT_MCU_LOAD_COOL_E:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1440,6 +1526,7 @@ ENUM_OUT_MCU_LOAD_COOL_F:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1453,6 +1540,7 @@ ENUM_OUT_MCU_LOAD_HEAT_A:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1466,6 +1554,7 @@ ENUM_OUT_MCU_LOAD_HEAT_B:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1479,6 +1568,7 @@ ENUM_OUT_MCU_LOAD_HEAT_C:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1492,6 +1582,7 @@ ENUM_OUT_MCU_LOAD_HEAT_D:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1505,6 +1596,7 @@ ENUM_OUT_MCU_LOAD_HEAT_E:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1518,6 +1610,7 @@ ENUM_OUT_MCU_LOAD_HEAT_F:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1531,6 +1624,7 @@ ENUM_OUT_MCU_LOAD_LIQUID:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1544,6 +1638,7 @@ ENUM_OUT_MCU_PORT0_INDOOR_ADDR:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1557,6 +1652,7 @@ ENUM_OUT_MCU_PORT1_INDOOR_ADDR:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1570,6 +1666,7 @@ ENUM_OUT_MCU_PORT2_INDOOR_ADDR:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1583,6 +1680,7 @@ ENUM_OUT_MCU_PORT3_INDOOR_ADDR:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1596,6 +1694,7 @@ ENUM_OUT_MCU_PORT4_INDOOR_ADDR:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1609,6 +1708,7 @@ ENUM_OUT_MCU_PORT5_INDOOR_ADDR:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1623,6 +1723,7 @@ ENUM_OUT_OPERATION_AUTO_INSPECT_STEP:
     1: 'ON'
   description: Automatic check step
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1640,6 +1741,7 @@ ENUM_OUT_OPERATION_SERVICE_OP:
     13: Cooling_Test_Run
     14: Pump_Down
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -1659,6 +1761,7 @@ ENUM_OUT_OP_A2_CURRENTMODE:
     1: A2W
     2: A2A
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -1684,6 +1787,7 @@ ENUM_OUT_OP_CHECK_REF_STEP:
     8: RefStep_8
     255: 'off'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -1709,6 +1813,7 @@ ENUM_OUT_STATE_ACCUM_VALVE_ONOFF:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -1719,6 +1824,7 @@ ENUM_OUT_STATE_ACCUM_VALVE_ONOFF:
 LVAR_AD_MCU_PORT_SETUP:
   address: '0x0448'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1729,6 +1835,7 @@ LVAR_AD_MCU_PORT_SETUP:
 LVAR_IN_AUTO_STATIC_PRESSURE:
   address: '0x4415'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1741,6 +1848,7 @@ LVAR_IN_DEVICE_STAUS_HEATPUMP_BOILER:
   arithmetic: (value & 0x00000002) / 2
   description: Switch_HyrdoFlow
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -1751,6 +1859,7 @@ LVAR_IN_DEVICE_STAUS_HEATPUMP_BOILER:
 LVAR_IN_ENTER_ROOM_CONTROL_DATA:
   address: '0x441B'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1761,6 +1870,7 @@ LVAR_IN_ENTER_ROOM_CONTROL_DATA:
 LVAR_IN_ETO_COOL_CONTROL_DATA:
   address: '0x441F'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1771,6 +1881,7 @@ LVAR_IN_ETO_COOL_CONTROL_DATA:
 LVAR_IN_ETO_HEAT_CONTROL_DATA:
   address: '0x4420'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1783,6 +1894,7 @@ LVAR_IN_GENERATED_POWER_LAST_MINUTE:
   arithmetic: value / 1000
   description: Generated power last minute
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: energy
     platform:
@@ -1797,6 +1909,7 @@ LVAR_IN_MINUTES_ACTIVE:
   address: '0x4424'
   description: Minutes active
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: duration
     platform:
@@ -1811,6 +1924,7 @@ LVAR_IN_MINUTES_SINCE_INSTALLATION:
   address: '0x4423'
   description: Minutes since installation
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: duration
     platform:
@@ -1826,6 +1940,7 @@ LVAR_IN_TOTAL_GENERATED_POWER:
   arithmetic: value / 1000
   description: Total generated power
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: energy
     platform:
@@ -1840,6 +1955,7 @@ LVAR_IN_TOTAL_GENERATED_POWER:
 LVAR_OUT_AUTO_INSPECT_RESULT0:
   address: '0x840B'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -1850,6 +1966,7 @@ LVAR_OUT_AUTO_INSPECT_RESULT0:
 LVAR_OUT_AUTO_INSPECT_RESULT1:
   address: '0x840C'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -1860,6 +1977,7 @@ LVAR_OUT_AUTO_INSPECT_RESULT1:
 NASA_ADDRESSING:
   address: '0x2003'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1869,6 +1987,7 @@ NASA_ADDRESSING:
 NASA_ADDRESSING_ASSIGN_CONFIRM_ADDRESS:
   address: '0x2002'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1877,6 +1996,7 @@ NASA_ADDRESSING_ASSIGN_CONFIRM_ADDRESS:
 NASA_AHUPANEL_AHUKIT_ADDRESS:
   address: '0x461C'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1886,6 +2006,7 @@ NASA_AHUPANEL_AHUKIT_ADDRESS:
 NASA_AHUPANEL_CO2_CONTROL:
   address: '0x40CA'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1894,6 +2015,7 @@ NASA_AHUPANEL_CO2_CONTROL:
 NASA_AHUPANEL_DUTY_CONTROL:
   address: '0x40C8'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1902,6 +2024,7 @@ NASA_AHUPANEL_DUTY_CONTROL:
 NASA_AHUPANEL_EA_RATE:
   address: '0x4294'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1910,6 +2033,7 @@ NASA_AHUPANEL_EA_RATE:
 NASA_AHUPANEL_ENERGYMANAGE_CONTROL:
   address: '0x40CB'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1918,6 +2042,7 @@ NASA_AHUPANEL_ENERGYMANAGE_CONTROL:
 NASA_AHUPANEL_ENTHALPY_CONTROL:
   address: '0x40C7'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1926,6 +2051,7 @@ NASA_AHUPANEL_ENTHALPY_CONTROL:
 NASA_AHUPANEL_ERROR_STATUS:
   address: '0x40CF'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1934,6 +2060,7 @@ NASA_AHUPANEL_ERROR_STATUS:
 NASA_AHUPANEL_HEATER_ONOFF_STATUS:
   address: '0x40D0'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1942,6 +2069,7 @@ NASA_AHUPANEL_HEATER_ONOFF_STATUS:
 NASA_AHUPANEL_MIXING_RATE:
   address: '0x429B'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1950,6 +2078,7 @@ NASA_AHUPANEL_MIXING_RATE:
 NASA_AHUPANEL_MIXING_TEMP:
   address: '0x429A'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1958,6 +2087,7 @@ NASA_AHUPANEL_MIXING_TEMP:
 NASA_AHUPANEL_OA_DAMPER_TARGET_RATE:
   address: '0x4291'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1966,6 +2096,7 @@ NASA_AHUPANEL_OA_DAMPER_TARGET_RATE:
 NASA_AHUPANEL_OA_HUMIDITY:
   address: '0x4296'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1974,6 +2105,7 @@ NASA_AHUPANEL_OA_HUMIDITY:
 NASA_AHUPANEL_OA_TEMP:
   address: '0x4295'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1982,6 +2114,7 @@ NASA_AHUPANEL_OA_TEMP:
 NASA_AHUPANEL_PANEL_OPTION:
   address: '0x461D'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1991,6 +2124,7 @@ NASA_AHUPANEL_PANEL_OPTION:
 NASA_AHUPANEL_POINT_STATUS:
   address: '0x429C'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -1999,6 +2133,7 @@ NASA_AHUPANEL_POINT_STATUS:
 NASA_AHUPANEL_RA_FAN_ONOFF_STATUS:
   address: '0x40CE'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2007,6 +2142,7 @@ NASA_AHUPANEL_RA_FAN_ONOFF_STATUS:
 NASA_AHUPANEL_RA_HUMIDITY:
   address: '0x4293'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2015,6 +2151,7 @@ NASA_AHUPANEL_RA_HUMIDITY:
 NASA_AHUPANEL_RA_SMOKE_DECTION_STATUS:
   address: '0x40CC'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2023,6 +2160,7 @@ NASA_AHUPANEL_RA_SMOKE_DECTION_STATUS:
 NASA_AHUPANEL_RA_TEMP:
   address: '0x4292'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2031,6 +2169,7 @@ NASA_AHUPANEL_RA_TEMP:
 NASA_AHUPANEL_SA_FAN_ONOFF_STATUS:
   address: '0x40D1'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2039,6 +2178,7 @@ NASA_AHUPANEL_SA_FAN_ONOFF_STATUS:
 NASA_AHUPANEL_SA_FAN_STATUS:
   address: '0x40CD'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2047,6 +2187,7 @@ NASA_AHUPANEL_SA_FAN_STATUS:
 NASA_AHUPANEL_SA_HUMIDITY:
   address: '0x4298'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2057,6 +2198,7 @@ NASA_AHUPANEL_SA_HUMIDITY:
 NASA_AHUPANEL_SA_TEMP:
   address: '0x4297'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2067,6 +2209,7 @@ NASA_AHUPANEL_SA_TEMP:
 NASA_AHUPANEL_SMOKE_DECTION_CONTROL:
   address: '0x40D2'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2075,6 +2218,7 @@ NASA_AHUPANEL_SMOKE_DECTION_CONTROL:
 NASA_AHUPANEL_STATIC_PRESSURE:
   address: '0x4299'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2083,6 +2227,7 @@ NASA_AHUPANEL_STATIC_PRESSURE:
 NASA_AHUPANEL_SUMMERNIGHT_CONTROL:
   address: '0x40C9'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2091,6 +2236,7 @@ NASA_AHUPANEL_SUMMERNIGHT_CONTROL:
 NASA_AHUPANEL_TARGET_HUMIDITY:
   address: '0x4290'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2103,6 +2249,7 @@ NASA_AIRFLOW_LEFTRIGHT:
     1: 'ON'
   description: Left and right wind direction settings/status
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -2118,6 +2265,7 @@ NASA_AIRFLOW_UPDOWN:
     1: 'ON'
   description: Up and down wind direction setting/status
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -2128,6 +2276,7 @@ NASA_AIRFLOW_UPDOWN:
 NASA_ALL_LAYER_DEVICE_COUNT:
   address: '0x2400'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -2139,6 +2288,7 @@ NASA_ALL_POWER_CONSUMPTION_CUMULATIVE:
   address: '0x0407'
   description: Total cumulative power consumption
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2148,6 +2298,7 @@ NASA_ALL_POWER_CONSUMPTION_SET:
   address: '0x0406'
   description: Total instantaneous power consumption
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2156,6 +2307,7 @@ NASA_ALL_POWER_CONSUMPTION_SET:
 NASA_ALL_REMOTE_LEVEL:
   address: '0x0409'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -2169,6 +2321,7 @@ NASA_ALTERNATIVE_MODE:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -2180,6 +2333,7 @@ NASA_ALTERNATIVE_MODE:
 NASA_CHANGE_ALL_NETWORK_STATUS:
   address: '0x200A'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2188,6 +2342,7 @@ NASA_CHANGE_ALL_NETWORK_STATUS:
 NASA_CHANGE_CONTROL_NETWORK_STATUS:
   address: '0x2006'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2196,6 +2351,7 @@ NASA_CHANGE_CONTROL_NETWORK_STATUS:
 NASA_CHANGE_LOCAL_NETWORK_STATUS:
   address: '0x2008'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2204,6 +2360,7 @@ NASA_CHANGE_LOCAL_NETWORK_STATUS:
 NASA_CHANGE_MODULE_NETWORK_STATUS:
   address: '0x2009'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2212,6 +2369,7 @@ NASA_CHANGE_MODULE_NETWORK_STATUS:
 NASA_CHANGE_POLAR:
   address: '0x2001'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2220,6 +2378,7 @@ NASA_CHANGE_POLAR:
 NASA_CHANGE_SET_NETWORK_STATUS:
   address: '0x2007'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2228,6 +2387,7 @@ NASA_CHANGE_SET_NETWORK_STATUS:
 NASA_COMMU_MICOM_BUTTON:
   address: '0x2018'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2236,6 +2396,7 @@ NASA_COMMU_MICOM_BUTTON:
 NASA_COMMU_MICOM_LED:
   address: '0x2017'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2244,6 +2405,7 @@ NASA_COMMU_MICOM_LED:
 NASA_CONFIRM_ADDRESS:
   address: '0x0401'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2254,6 +2416,7 @@ NASA_CONFIRM_ADDRESS:
 NASA_CONTROL_AUTO_CLEAN:
   address: '0x4042'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2262,6 +2425,7 @@ NASA_CONTROL_AUTO_CLEAN:
 NASA_CONTROL_DESIRED_HUMIDITY:
   address: '0x405E'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2270,6 +2434,7 @@ NASA_CONTROL_DESIRED_HUMIDITY:
 NASA_CONTROL_HUMIDIFICATION:
   address: '0x4041'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2278,6 +2443,7 @@ NASA_CONTROL_HUMIDIFICATION:
 NASA_CONTROL_MDS:
   address: '0x403F'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2286,6 +2452,7 @@ NASA_CONTROL_MDS:
 NASA_CONTROL_OAINTAKE:
   address: '0x403D'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2294,6 +2461,7 @@ NASA_CONTROL_OAINTAKE:
 NASA_CONTROL_OUTER_COOL:
   address: '0x405C'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2306,6 +2474,7 @@ NASA_CONTROL_SILENCE:
     1: 'ON'
   description: Silence mode
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -2317,6 +2486,7 @@ NASA_CONTROL_SILENCE:
 NASA_CONTROL_SILENCT:
   address: '0x4050'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2325,6 +2495,7 @@ NASA_CONTROL_SILENCT:
 NASA_CONTROL_SPI:
   address: '0x4043'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -2336,6 +2507,7 @@ NASA_COOL_SET_DISCHARGE:
   arithmetic: value / 10
   description: User limitation - Water Cooling Temperature Max.
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -2350,6 +2522,7 @@ NASA_CURRENT_DISCHARGE:
   arithmetic: value / 10
   description: Indoor Discharge Temp(Duct, AHU)
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -2364,6 +2537,7 @@ NASA_CURRENT_TEMP:
   arithmetic: value / 10
   description: Room Temperature
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -2377,6 +2551,7 @@ NASA_CURRENT_TEMP:
 NASA_CYCLEOPTION:
   address: '0x0603'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -2386,6 +2561,7 @@ NASA_CYCLEOPTION:
 NASA_DEMAND_SYNC_TIME:
   address: '0x0213'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2394,6 +2570,7 @@ NASA_DEMAND_SYNC_TIME:
 NASA_DETECTION_TYPE:
   address: '0x000D'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2408,6 +2585,7 @@ NASA_DHW_OPMODE:
     2: Power
     3: Force
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -2422,6 +2600,7 @@ NASA_DHW_OPMODE:
 NASA_DHW_OPMODE_SUPPORT:
   address: '0x40B1'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2434,6 +2613,7 @@ NASA_DHW_POWER:
     1: 'ON'
   description: Water heater power
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -2449,6 +2629,7 @@ NASA_REFERENCE_TEMP:
     0: Room
     1: Water out
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -2465,6 +2646,7 @@ NASA_DHW_VALVE:
     0: ROOM
     1: TANK
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -2480,6 +2662,7 @@ NASA_DISCHARGE_TEMP_ENABLE:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -2492,6 +2675,7 @@ NASA_EEPROM_CODE:
   address: '0x060C'
   description: OutdoorTableEEPROMDBCodeVersion
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -2501,6 +2685,7 @@ NASA_EEPROM_CODE:
 NASA_EHS_FSV_SETTING_MIN_MAX_TEMP:
   address: '0x461A'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2510,6 +2695,7 @@ NASA_EHS_FSV_SETTING_MIN_MAX_TEMP:
 NASA_EHS_INDOOR_OPMODE:
   address: '0x4064'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2518,6 +2704,7 @@ NASA_EHS_INDOOR_OPMODE:
 NASA_EHS_INDOOR_POWER:
   address: '0x4063'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2526,6 +2713,7 @@ NASA_EHS_INDOOR_POWER:
 NASA_EHS_SETTING_MIN_MAX_TEMP:
   address: '0x4619'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2535,6 +2723,7 @@ NASA_EHS_SETTING_MIN_MAX_TEMP:
 NASA_ENABLEDOWNLOAD:
   address: '0x000A'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2542,18 +2731,36 @@ NASA_ENABLEDOWNLOAD:
     writable: false
 NASA_ERROR_CODE1:
   address: '0x0202'
-  description: Error code
+  description: Indoor Error code
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
       mode: slider
     writable: false
   signed: false
+  source_address_class: Indoor
   type: VAR
+NASA_ERROR_CODE1_OUTDOOR:
+  address: '0x0202'
+  description: Outdoor error code
+  hass_opts:
+    known: true
+    default_platform: sensor
+    platform:
+      type: number
+      mode: slider
+    writable: false
+  signed: false
+  source_address_class: Outdoor
+  type: VAR
+  invalid_raw_values:
+    - 'ffff'
 NASA_ERROR_CODE2:
   address: '0x0203'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2562,6 +2769,7 @@ NASA_ERROR_CODE2:
 NASA_ERROR_CODE3:
   address: '0x0204'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2570,6 +2778,7 @@ NASA_ERROR_CODE3:
 NASA_ERROR_CODE4:
   address: '0x0205'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2578,6 +2787,7 @@ NASA_ERROR_CODE4:
 NASA_ERROR_CODE5:
   address: '0x0206'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2586,6 +2796,7 @@ NASA_ERROR_CODE5:
 NASA_ERROR_INOUT:
   address: '0x440F'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -2602,6 +2813,7 @@ NASA_ERV_FANSPEED:
     3: High
     4: Turbo
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -2625,6 +2837,7 @@ NASA_ERV_OPMODE:
     6: Sleep
     7: Bypass_Purify
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -2646,6 +2859,7 @@ NASA_ERV_POWER:
     1: 'ON'
   description: Ventilation operation mode
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -2656,6 +2870,7 @@ NASA_ERV_POWER:
 NASA_EVA_INHOLE_TEMP:
   address: '0x4208'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2666,6 +2881,7 @@ NASA_EVA_IN_TEMP:
   arithmetic: value / 10
   description: Indoor Eva In Temperature
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -2680,6 +2896,7 @@ NASA_EVA_OUT_TEMP:
   arithmetic: value / 10
   description: Indoor Eva Out Temperature
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -2692,6 +2909,7 @@ NASA_EVA_OUT_TEMP:
 NASA_FANSPEED:
   address: '0x4006'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -2701,6 +2919,7 @@ NASA_FANSPEED:
 NASA_FILTER_CLEAN:
   address: '0x4025'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2712,6 +2931,7 @@ NASA_FILTER_WARNING:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -2722,6 +2942,7 @@ NASA_FILTER_WARNING:
 NASA_GATHER_INFORMATION:
   address: '0x0007'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2730,6 +2951,7 @@ NASA_GATHER_INFORMATION:
 NASA_GATHER_INFORMATION_COUNT:
   address: '0x0008'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2738,6 +2960,7 @@ NASA_GATHER_INFORMATION_COUNT:
 NASA_GROUPCONTROL_BIT1:
   address: '0x4405'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2746,6 +2969,7 @@ NASA_GROUPCONTROL_BIT1:
 NASA_GROUPCONTROL_BIT2:
   address: '0x4406'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2754,6 +2978,7 @@ NASA_GROUPCONTROL_BIT2:
 NASA_GROUPCONTROL_BIT3:
   address: '0x4407'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2763,6 +2988,7 @@ NASA_HEAT_SET_DISCHARGE:
   address: '0x422B'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -2778,6 +3004,7 @@ NASA_HUMIDITY_PERCENT:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -2788,6 +3015,7 @@ NASA_HUMIDITY_PERCENT:
 NASA_IM_MASTER:
   address: '0x2000'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2796,6 +3024,7 @@ NASA_IM_MASTER:
 NASA_IM_MASTER_NOTIFY:
   address: '0x0000'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2804,6 +3033,7 @@ NASA_IM_MASTER_NOTIFY:
 NASA_INDOOR_ABLE_FUNCTION:
   address: '0x4604'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -2814,6 +3044,7 @@ NASA_INDOOR_ABSOLUTE_CAPACITY:
   address: '0x4212'
   arithmetic: value / 8.5
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: power
     platform:
@@ -2826,6 +3057,7 @@ NASA_INDOOR_ABSOLUTE_CAPACITY:
 NASA_INDOOR_AIRCLEANFAN_CURRENT_RPM:
   address: '0x4220'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2838,6 +3070,7 @@ NASA_INDOOR_CAPACITY:
   arithmetic: value / 8.5
   description: Capacity
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: power
     platform:
@@ -2851,6 +3084,7 @@ NASA_INDOOR_CURRENT_EEV2:
   address: '0x4218'
   description: Current EEV2 development level
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2861,6 +3095,7 @@ NASA_INDOOR_CURRENT_EEV2:
 NASA_INDOOR_CURRENT_EEV3:
   address: '0x4219'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2869,6 +3104,7 @@ NASA_INDOOR_CURRENT_EEV3:
 NASA_INDOOR_CURRENT_EEV4:
   address: '0x421A'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -2881,6 +3117,7 @@ NASA_INDOOR_DEFROST_STATUS:
     1: 'ON'
   description: Defrost mode
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -2894,6 +3131,7 @@ NASA_INDOOR_DHW_CURRENT_TEMP:
   arithmetic: value / 10
   description: DHW tank current temperature
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     state_class: measurement
@@ -2910,6 +3148,7 @@ NASA_INDOOR_DHW_SET_TEMP:
   reverse-arithmetic: value * 10
   description: DHW target temperature
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -2926,6 +3165,7 @@ NASA_INDOOR_MODEL_INFORMATION:
   address: '0x4229'
   description: Indoor unit model information
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -2944,6 +3184,7 @@ NASA_INDOOR_OPMODE:
     21: Cool Storage
     24: Hot water
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -2962,6 +3203,7 @@ NASA_INDOOR_OUTER_TEMP:
   address: '0x420C'
   arithmetic: value / 10
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -2979,6 +3221,7 @@ NASA_INDOOR_OUT_GOING:
     1: 'ON'
   description: Outing mode
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -2991,6 +3234,7 @@ NASA_INDOOR_POWER_CONSUMPTION:
   address: '0x4284'
   description: Indoor unit power consumption
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3013,6 +3257,7 @@ NASA_INDOOR_REAL_OPMODE:
     24: Hot water
     255: NULL mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -3039,6 +3284,7 @@ NASA_INDOOR_SETTEMP_WATEROUT:
   reverse-arithmetic: value * 10
   description: Set Temp Waterout Heating Mode Zone 1
   hass_opts:
+      known: true
       default_platform: sensor
       device_class: temperature
       platform:
@@ -3054,6 +3300,7 @@ NASA_INDOOR_SETTEMP_WATEROUT:
 NASA_INDOOR_SETTING_MIN_MAX_TEMP:
   address: '0x4608'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3065,6 +3312,7 @@ NASA_INDOOR_WATER_IN_TEMP:
   arithmetic: value / 10
   description: Hydro_WaterIn
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     state_class: measurement
@@ -3080,6 +3328,7 @@ NASA_INDOOR_WATER_OUT_TEMP:
   arithmetic: value / 10
   description: Hydro_WaterOut
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     state_class: measurement
@@ -3094,6 +3343,7 @@ NASA_INODDR_CURRENT_EEV1:
   address: '0x4217'
   description: Current EEV development level
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3104,6 +3354,7 @@ NASA_INODDR_CURRENT_EEV1:
 NASA_INSPECTION_MODE:
   address: '0x0004'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3112,6 +3363,7 @@ NASA_INSPECTION_MODE:
 NASA_INSTALLOPTION2:
   address: '0x0602'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3121,6 +3373,7 @@ NASA_INSTALLOPTION2:
 NASA_INSTALL_OPTION:
   address: '0x0601'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3131,6 +3384,7 @@ NASA_LAYER:
   address: '0x200F'
   description: Enumeration Type
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3140,6 +3394,7 @@ NASA_LAYER:
 NASA_LEVEL_AIRSWING:
   address: '0x040D'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3151,6 +3406,7 @@ NASA_LEVEL_COOL_HIGH_TEMP_LIMIT:
   address: '0x0411'
   arithmetic: (value & 0xFFFF0000u) >> 16) / 10.0
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -3164,6 +3420,7 @@ NASA_LEVEL_COOL_LOW_TEMP_LIMIT:
   address: '0x0412'
   arithmetic: (value & 0xFFFF0000u) >> 16) / 10.0
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -3176,6 +3433,7 @@ NASA_LEVEL_COOL_LOW_TEMP_LIMIT:
 NASA_LEVEL_FANSPEED:
   address: '0x040C'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3187,6 +3445,7 @@ NASA_LEVEL_HEAT_HIGH_TEMP_LIMIT:
   address: '0x0413'
   arithmetic: (value & 0xFFFF0000u) >> 16) / 10.0
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -3200,6 +3459,7 @@ NASA_LEVEL_HEAT_LOW_TEMP_LIMIT:
   address: '0x0414'
   arithmetic: (value & 0xFFFF0000u) >> 16) / 10.0
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -3212,6 +3472,7 @@ NASA_LEVEL_HEAT_LOW_TEMP_LIMIT:
 NASA_LEVEL_KEEP_ALTERNATIVE_MODE:
   address: '0x040F'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3222,6 +3483,7 @@ NASA_LEVEL_KEEP_ALTERNATIVE_MODE:
 NASA_LEVEL_KEY_INPUT:
   address: '0x0416'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3233,6 +3495,7 @@ NASA_LEVEL_OPMODE:
   address: '0x040B'
   arithmetic: value & 0xFF
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3243,6 +3506,7 @@ NASA_LEVEL_OPMODE:
 NASA_LEVEL_OPMODE_LIMIT:
   address: '0x0410'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3253,6 +3517,7 @@ NASA_LEVEL_OPMODE_LIMIT:
 NASA_LEVEL_OUT_POINT_INPUT:
   address: '0x0415'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3263,6 +3528,7 @@ NASA_LEVEL_OUT_POINT_INPUT:
 NASA_LEVEL_POWER:
   address: '0x040A'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3273,6 +3539,7 @@ NASA_LEVEL_POWER:
 NASA_LEVEL_SETTEMP:
   address: '0x040E'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3284,6 +3551,7 @@ NASA_MICOM_CODE:
   address: '0x0608'
   description: OutdoorUnitMainDBCodeVersion
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3296,6 +3564,7 @@ NASA_MODIFIED_CURRENT_TEMP:
   arithmetic: value / 10
   description: Temperature
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -3308,6 +3577,7 @@ NASA_MODIFIED_CURRENT_TEMP:
 NASA_NAME:
   address: '0x0605'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3318,6 +3588,7 @@ NASA_NAME:
 NASA_NET_ADDRESS:
   address: '0x0210'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3329,6 +3600,7 @@ NASA_OUTDOOR_4WAY2_VALVE:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -3343,6 +3615,7 @@ NASA_OUTDOOR_4WAY_VALVE:
     1: 'ON'
   description: 4Way On/Off
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -3353,6 +3626,7 @@ NASA_OUTDOOR_4WAY_VALVE:
 NASA_OUTDOOR_ACCUMULATOR_CCH:
   address: '0x8016'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3361,6 +3635,7 @@ NASA_OUTDOOR_ACCUMULATOR_CCH:
 NASA_OUTDOOR_ACCUM_RETURN2_VALVE:
   address: '0x80AC'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3373,6 +3648,7 @@ NASA_OUTDOOR_ACCUM_RETURN_VALVE:
     1: 'ON'
   description: ARV On/Off
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -3385,6 +3661,7 @@ NASA_OUTDOOR_ACCUM_TEMP:
   arithmetic: value / 10
   description: Accumulator outlet temperature
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -3399,6 +3676,7 @@ NASA_OUTDOOR_APPEARANCE_RPM:
   arithmetic: value / 10
   description: Appearance RPM
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3415,6 +3693,7 @@ NASA_OUTDOOR_BACKUP_OPERATION:
     1: 'ON'
   description: Backup operation operation status On/Off
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -3429,6 +3708,7 @@ NASA_OUTDOOR_BASE_HEATER:
     1: 'ON'
   description: Base heater On/Off state for EHS
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -3444,6 +3724,7 @@ NASA_OUTDOOR_CBOX_COOLING_FAN:
     1: 'ON'
   description: DC Fan
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -3456,6 +3737,7 @@ NASA_OUTDOOR_CBOX_TEMP:
   arithmetic: value / 10
   description: Contor Box Temp
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -3472,6 +3754,7 @@ NASA_OUTDOOR_CCH1_STATUS:
     1: 'ON'
   description: CCH1 On/Off
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -3486,6 +3769,7 @@ NASA_OUTDOOR_CCH2_STATUS:
     1: 'ON'
   description: CCH2 On/Off
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -3496,6 +3780,7 @@ NASA_OUTDOOR_CCH2_STATUS:
 NASA_OUTDOOR_CCH3_STATUS:
   address: '0x8015'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3504,6 +3789,7 @@ NASA_OUTDOOR_CCH3_STATUS:
 NASA_OUTDOOR_CH_SWITCH_VALUE:
   address: '0x80B2'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3515,6 +3801,7 @@ NASA_OUTDOOR_COMP1_ORDER_HZ:
   address: '0x8236'
   description: Instruction frequency 1
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
         max: 70
@@ -3531,6 +3818,7 @@ NASA_OUTDOOR_COMP1_RUNNING_TIME:
   address: '0x8405'
   description: OutdoorTableCompressorRunningTime 1
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3543,6 +3831,7 @@ NASA_OUTDOOR_COMP1_RUN_HZ:
   address: '0x8238'
   description: Current frequency 1
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3558,6 +3847,7 @@ NASA_OUTDOOR_COMP1_STATUS:
     1: 'ON'
   description: Comp#1 On/Off
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -3569,6 +3859,7 @@ NASA_OUTDOOR_COMP1_TARGET_HZ:
   address: '0x8237'
   description: Target frequency 1
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3581,6 +3872,7 @@ NASA_OUTDOOR_COMP2_ORDER_HZ:
   address: '0x8274'
   description: Instruction frequency 2
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3593,6 +3885,7 @@ NASA_OUTDOOR_COMP2_RUNNING_TIME:
   address: '0x8406'
   description: OutdoorTableCompressorRunningTime 2
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3604,6 +3897,7 @@ NASA_OUTDOOR_COMP2_RUN_HZ:
   address: '0x8276'
   description: Current frequency 2
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3619,6 +3913,7 @@ NASA_OUTDOOR_COMP2_STATUS:
     1: 'ON'
   description: Comp#2 On/Off
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -3630,6 +3925,7 @@ NASA_OUTDOOR_COMP2_TARGET_HZ:
   address: '0x8275'
   description: Target frequency 2
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3641,6 +3937,7 @@ NASA_OUTDOOR_COMP2_TARGET_HZ:
 NASA_OUTDOOR_COMP3_ORDER_HZ:
   address: '0x82C0'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3650,6 +3947,7 @@ NASA_OUTDOOR_COMP3_ORDER_HZ:
 NASA_OUTDOOR_COMP3_RUNNING_TIME:
   address: '0x840E'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3658,6 +3956,7 @@ NASA_OUTDOOR_COMP3_RUNNING_TIME:
 NASA_OUTDOOR_COMP3_RUN_HZ:
   address: '0x82C2'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3671,6 +3970,7 @@ NASA_OUTDOOR_COMP3_STATUS:
     1: 'ON'
   description: Comp#3 On/Off
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -3681,6 +3981,7 @@ NASA_OUTDOOR_COMP3_STATUS:
 NASA_OUTDOOR_COMP3_TARGET_HZ:
   address: '0x82C1'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3690,6 +3991,7 @@ NASA_OUTDOOR_COMP3_TARGET_HZ:
 NASA_OUTDOOR_COMPENSATE_COOL_CAPA:
   address: '0x829C'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3698,6 +4000,7 @@ NASA_OUTDOOR_COMPENSATE_COOL_CAPA:
 NASA_OUTDOOR_COMPENSATE_HEAT_CAPA:
   address: '0x829D'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3710,6 +4013,7 @@ NASA_OUTDOOR_COM_PROTECT_OPERATIOIN:
     1: 'ON'
   description: Compressor protection control operation status On/Off
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -3723,6 +4027,7 @@ NASA_OUTDOOR_COND_OUT1:
   arithmetic: value / 10
   description: Main heat exchanger outlet temperature
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -3737,6 +4042,7 @@ NASA_OUTDOOR_COND_OUT2:
   arithmetic: value / 10
   description: Sub heat exchanger outlet temperature
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -3751,6 +4057,7 @@ NASA_OUTDOOR_COND_OVER_COOL:
   arithmetic: value / 10
   description: Outdoor heat exchanger subcooling degree
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3761,6 +4068,7 @@ NASA_OUTDOOR_COND_OVER_COOL:
 NASA_OUTDOOR_CONTROL_PRIME_UNIT:
   address: '0x823F'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3773,6 +4081,7 @@ NASA_OUTDOOR_CONTROL_WATTMETER_1UNIT:
   description: Instantaneous power consumption of outdoor unit. One outdoor unit.
     Not used by the controller.
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3785,6 +4094,7 @@ NASA_OUTDOOR_CONTROL_WATTMETER_1UNIT_ACCUM:
   description: Cumulative power consumption of outdoor unit. One outdoor unit. Not
     used by the controller.
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3796,6 +4106,7 @@ NASA_OUTDOOR_CONTROL_WATTMETER_ALL_UNIT:
   arithmetic: value / 1000
   description: Outdoor unit instantaneous power consumption. Sum of modules
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: power
     state_class: measurement
@@ -3812,6 +4123,7 @@ NASA_OUTDOOR_CONTROL_WATTMETER_ALL_UNIT_ACCUM:
   arithmetic: value / 1000
   description: Outdoor unit cumulative power consumption. Sum of modules
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: energy
     platform:
@@ -3827,6 +4139,7 @@ NASA_OUTDOOR_CONTROL_WATTMETER_TOTAL_SUM:
   address: '0x8415'
   description: Total (indoor + outdoor) instantaneous power consumption
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3838,6 +4151,7 @@ NASA_OUTDOOR_CONTROL_WATTMETER_TOTAL_SUM_ACCUM:
   address: '0x8416'
   description: Total (indoor + outdoor) cumulative power consumption
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3848,6 +4162,7 @@ NASA_OUTDOOR_CONTROL_WATTMETER_TOTAL_SUM_ACCUM:
 NASA_OUTDOOR_COOLONLY_MODEL:
   address: '0x809D'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3858,6 +4173,7 @@ NASA_OUTDOOR_COOLONLY_MODEL:
 NASA_OUTDOOR_COOL_SUM_CAPA:
   address: '0x8298'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3868,6 +4184,7 @@ NASA_OUTDOOR_CT1:
   arithmetic: value / 10
   description: Compressor 1 current
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3880,6 +4197,7 @@ NASA_OUTDOOR_CT2:
   address: '0x8277'
   description: Compressor 2 current
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3890,6 +4208,7 @@ NASA_OUTDOOR_CT2:
 NASA_OUTDOOR_CT3:
   address: '0x82A3'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3898,6 +4217,7 @@ NASA_OUTDOOR_CT3:
 NASA_OUTDOOR_CT_RESTRICT_OPTION:
   address: '0x829B'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -3907,6 +4227,7 @@ NASA_OUTDOOR_DCLINK1_VOLT:
   address: '0x823B'
   description: DC Link1 (Inverter DC voltage input)
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: voltage
     platform:
@@ -3920,6 +4241,7 @@ NASA_OUTDOOR_DCLINK1_VOLT:
 NASA_OUTDOOR_DCLINK2_VOLT:
   address: '0x82B3'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3928,6 +4250,7 @@ NASA_OUTDOOR_DCLINK2_VOLT:
 NASA_OUTDOOR_DCLINK3_VOLT:
   address: '0x82C3'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -3950,6 +4273,7 @@ NASA_OUTDOOR_DEFROST_STEP:
     10: Defrost stage 10
     255: No defrost operation
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -3974,6 +4298,7 @@ NASA_OUTDOOR_DISCHARGE_TEMP1:
   arithmetic: value / 10
   description: Discharge1
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -3990,6 +4315,7 @@ NASA_OUTDOOR_DISCHARGE_TEMP2:
   arithmetic: value / 10
   description: Discharge2
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -4004,6 +4330,7 @@ NASA_OUTDOOR_DISCHARGE_TEMP3:
   arithmetic: value / 10
   description: Discharge3
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -4018,6 +4345,7 @@ NASA_OUTDOOR_DOUBLE_TUBE:
   arithmetic: value / 10
   description: Liquid pipe temperature
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -4030,6 +4358,7 @@ NASA_OUTDOOR_DOUBLE_TUBE:
 NASA_OUTDOOR_DRED_LEVEL:
   address: '0x80A7'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4040,6 +4369,7 @@ NASA_OUTDOOR_DRED_LEVEL:
 NASA_OUTDOOR_EHSCOUNT:
   address: '0x0209'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4049,6 +4379,7 @@ NASA_OUTDOOR_ENGINE_RPM:
   address: '0x82CF'
   description: Engine RPM
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4063,6 +4394,7 @@ NASA_OUTDOOR_ENGINE_WATER_TEMP:
   arithmetic: value / 10
   description: Engine water temperature
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -4075,6 +4407,7 @@ NASA_OUTDOOR_ENGINE_WATER_TEMP:
 NASA_OUTDOOR_ERVCOUNT:
   address: '0x0208'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4085,6 +4418,7 @@ NASA_OUTDOOR_EVA_IN:
   arithmetic: value / 10
   description: Eva In for EHS
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -4098,6 +4432,7 @@ NASA_OUTDOOR_EVIEEV:
   address: '0x822E'
   description: EVI EEV
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4112,6 +4447,7 @@ NASA_OUTDOOR_EVI_BYPASS_VALVE:
     1: 'ON'
   description: EVI ByPass On/Off
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -4124,6 +4460,7 @@ NASA_OUTDOOR_EVI_IN:
   arithmetic: value / 10
   description: EVI IN
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -4138,6 +4475,7 @@ NASA_OUTDOOR_EVI_OUT:
   arithmetic: value / 10
   description: EVI OUT
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -4154,6 +4492,7 @@ NASA_OUTDOOR_EVI_SOL1_VALVE:
     1: 'ON'
   description: EVI Sol1 On/Off
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -4168,6 +4507,7 @@ NASA_OUTDOOR_EVI_SOL2_VALVE:
     1: 'ON'
   description: EVI Sol2 On/Off
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -4178,6 +4518,7 @@ NASA_OUTDOOR_EVI_SOL2_VALVE:
 NASA_OUTDOOR_EVI_SOL3_VALVE:
   address: '0x8024'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4186,6 +4527,7 @@ NASA_OUTDOOR_EVI_SOL3_VALVE:
 NASA_OUTDOOR_EXT_CMD_OPERATION:
   address: '0x8081'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4196,6 +4538,7 @@ NASA_OUTDOOR_EXT_CMD_OPERATION:
 NASA_OUTDOOR_FAN_CT1:
   address: '0x82B9'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4204,6 +4547,7 @@ NASA_OUTDOOR_FAN_CT1:
 NASA_OUTDOOR_FAN_CT2:
   address: '0x82BA'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4212,6 +4556,7 @@ NASA_OUTDOOR_FAN_CT2:
 NASA_OUTDOOR_FAN_IPM1_TEMP:
   address: '0x82A6'
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -4222,6 +4567,7 @@ NASA_OUTDOOR_FAN_IPM1_TEMP:
 NASA_OUTDOOR_FAN_IPM2_TEMP:
   address: '0x82A7'
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -4233,6 +4579,7 @@ NASA_OUTDOOR_FAN_RPM1:
   address: '0x823D'
   description: Outdoor Fan1 RPM
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4246,6 +4593,7 @@ NASA_OUTDOOR_FAN_RPM2:
   address: '0x823E'
   description: Outdoor Fan2 RPM
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4259,6 +4607,7 @@ NASA_OUTDOOR_FAN_STEP1:
   address: '0x8226'
   description: Outdoor Fan Step
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4270,6 +4619,7 @@ NASA_OUTDOOR_FAN_STEP1:
 NASA_OUTDOOR_FAN_STEP2:
   address: '0x8227'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4283,6 +4633,7 @@ NASA_OUTDOOR_FLOW_SWITCH:
     1: 'ON'
   description: Flow Switch
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -4294,6 +4645,7 @@ NASA_OUTDOOR_FLUX_VARIABLE_VALVE:
   address: '0x82BD'
   description: Flow Control
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4308,6 +4660,7 @@ NASA_OUTDOOR_GAS_CHARGE:
     1: 'ON'
   description: Hot Gas Chargin
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -4318,6 +4671,7 @@ NASA_OUTDOOR_GAS_CHARGE:
 NASA_OUTDOOR_HEATING_PERCENT:
   address: '0x8231'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4330,6 +4684,7 @@ NASA_OUTDOOR_HIGH_PRESS:
   arithmetic: (value / 10) * 0.980665
   description: High pressure
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: pressure
     platform:
@@ -4344,6 +4699,7 @@ NASA_OUTDOOR_HIGH_PRESS_TEMP:
   arithmetic: value / 10
   description: High pressure saturation temperature
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -4360,6 +4716,7 @@ NASA_OUTDOOR_HOTGAS1:
     1: 'ON'
   description: HotGas1 On/Off
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -4374,6 +4731,7 @@ NASA_OUTDOOR_HOTGAS2:
     1: 'ON'
   description: HotGas2 On/Off
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -4386,6 +4744,7 @@ NASA_OUTDOOR_HP:
   arithmetic: value * 0.7457
   description: Outdoor unit horsepower (in kw)
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4398,6 +4757,7 @@ NASA_OUTDOOR_HP:
 NASA_OUTDOOR_HREEV:
   address: '0x822F'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4407,6 +4767,7 @@ NASA_OUTDOOR_INDOORCOUNT:
   address: '0x0207'
   description: Number of indoor units connected
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4426,6 +4787,7 @@ NASA_OUTDOOR_INDOOR_DEFROST_STEP:
     7: Defrost operation end stage
     255: No defrost operation
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -4446,6 +4808,7 @@ NASA_OUTDOOR_IPM_TEMP1:
   arithmetic: value / 10
   description: IPM1 Temperature
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -4465,6 +4828,7 @@ NASA_OUTDOOR_IPM_TEMP2:
   arithmetic: value / 10
   description: IPM2 Temperature
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -4479,6 +4843,7 @@ NASA_OUTDOOR_IPM_TEMP3:
   arithmetic: value / 10
   description: IPM 3 Temperartur
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -4493,6 +4858,7 @@ NASA_OUTDOOR_LIQUID_BYPASS_VALVE:
     1: 'ON'
   description: Liquid On/Off
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -4507,6 +4873,7 @@ NASA_OUTDOOR_LIQUID_TUBE_VALVE:
     1: 'ON'
   description: Liquid tube
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -4517,6 +4884,7 @@ NASA_OUTDOOR_LIQUID_TUBE_VALVE:
 NASA_OUTDOOR_LOADINGTIME:
   address: '0x8228'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4525,6 +4893,7 @@ NASA_OUTDOOR_LOADINGTIME:
 NASA_OUTDOOR_LOGICAL_DEFROST_STEP:
   address: '0x8062'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4535,6 +4904,7 @@ NASA_OUTDOOR_LOW_PRESS:
   arithmetic: (value / 10) * 0.980665
   description: low pressure
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: pressure
     platform:
@@ -4549,6 +4919,7 @@ NASA_OUTDOOR_LOW_PRESS_TEMP:
   arithmetic: value / 10
   description: Low pressure saturation temperature
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -4562,6 +4933,7 @@ NASA_OUTDOOR_MAINEEV1:
   address: '0x8229'
   description: Main EEV1
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4577,6 +4949,7 @@ NASA_OUTDOOR_MAINEEV2:
   address: '0x822A'
   description: Main EEV2
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4588,6 +4961,7 @@ NASA_OUTDOOR_MAINEEV3:
   address: '0x822B'
   description: Main EEV3
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4599,6 +4973,7 @@ NASA_OUTDOOR_MAINEEV4:
   address: '0x822C'
   description: Main EEV4
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4610,6 +4985,7 @@ NASA_OUTDOOR_MAINEEV5:
   address: '0x822D'
   description: Main EEV5
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4623,6 +4999,7 @@ NASA_OUTDOOR_MAIN_COOL_VALVE:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -4634,6 +5011,7 @@ NASA_OUTDOOR_MCUCOUNT:
   address: '0x0211'
   description: Number of connected MCUs
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4646,6 +5024,7 @@ NASA_OUTDOOR_MID_PRESS:
   arithmetic: (value / 10) * 0.980665
   description: medium pressure
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: pressure
     platform:
@@ -4659,6 +5038,7 @@ NASA_OUTDOOR_MODELINFORMATION:
   address: '0x860D'
   description: Structure Type
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4669,6 +5049,7 @@ NASA_OUTDOOR_OCT1:
   address: '0x8278'
   description: Compressor OCT1
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4679,6 +5060,7 @@ NASA_OUTDOOR_OCT1:
 NASA_OUTDOOR_OCT2:
   address: '0x8279'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4687,6 +5069,7 @@ NASA_OUTDOOR_OCT2:
 NASA_OUTDOOR_OCT3:
   address: '0x82A4'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4696,6 +5079,7 @@ NASA_OUTDOOR_ODU_CAPA1:
   address: '0x8240'
   description: current electric capacity of outdoor unit
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4705,6 +5089,7 @@ NASA_OUTDOOR_ODU_CAPA1:
 NASA_OUTDOOR_ODU_CAPA2:
   address: '0x8241'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4713,6 +5098,7 @@ NASA_OUTDOOR_ODU_CAPA2:
 NASA_OUTDOOR_ODU_CAPA3:
   address: '0x827E'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4721,6 +5107,7 @@ NASA_OUTDOOR_ODU_CAPA3:
 NASA_OUTDOOR_ODU_CAPA4:
   address: '0x827F'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4733,6 +5120,7 @@ NASA_OUTDOOR_OD_EEV_VALVE:
     1: 'ON'
     255: 'OFF'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -4743,6 +5131,7 @@ NASA_OUTDOOR_OD_EEV_VALVE:
 NASA_OUTDOOR_OIL_BALANCE_STEP:
   address: '0x8245'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4752,6 +5141,7 @@ NASA_OUTDOOR_OIL_BYPASS_VALVE:
   address: '0x82CA'
   description: Oil Bypass Valve
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4762,6 +5152,7 @@ NASA_OUTDOOR_OIL_BYPASS_VALVE:
 NASA_OUTDOOR_OIL_RECOVERY_STEP:
   address: '0x8244'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4770,6 +5161,7 @@ NASA_OUTDOOR_OIL_RECOVERY_STEP:
 NASA_OUTDOOR_OLP_TEMP:
   address: '0x8222'
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -4782,6 +5174,7 @@ NASA_OUTDOOR_OPERATION_CAPA_SUM:
   address: '0x8233'
   arithmetic: value / 8.5
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: power
     platform:
@@ -4802,6 +5195,7 @@ NASA_OUTDOOR_OPERATION_MODE:
     3: CoolMain
     4: HeatMain
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -4856,6 +5250,7 @@ NASA_OUTDOOR_OPERATION_STATUS:
     35: OP_AUTO_PIPE_PAIRING
     36: OP_AUTO_CHARGE
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -4910,6 +5305,7 @@ NASA_OUTDOOR_OPERATION_STATUS:
 NASA_OUTDOOR_OPMODELIMIT:
   address: '0x8066'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4920,6 +5316,7 @@ NASA_OUTDOOR_OPMODELIMIT:
 NASA_OUTDOOR_OPMODE_OPTION:
   address: '0x8200'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4931,6 +5328,7 @@ NASA_OUTDOOR_OUT_TEMP:
   arithmetic: value / 10
   description: Outdoor temperature
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     state_class: measurement
@@ -4945,6 +5343,7 @@ NASA_OUTDOOR_OVER_COOL:
   address: '0x82CD'
   description: Outdoor unit supercooling
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4956,6 +5355,7 @@ NASA_OUTDOOR_PHASE_CURRENT:
   address: '0x82DB'
   description: Phase current value
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -4967,6 +5367,7 @@ NASA_OUTDOOR_PROJECT_CODE:
   address: '0x82BC'
   description: Project code
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -4981,6 +5382,7 @@ NASA_OUTDOOR_PUMPOUT_VALVE:
     1: 'ON'
   description: Pump Out
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -4991,6 +5393,7 @@ NASA_OUTDOOR_PUMPOUT_VALVE:
 NASA_OUTDOOR_RUNNING_SUM_CAPA:
   address: '0x8230'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5000,6 +5403,7 @@ NASA_OUTDOOR_RUNNING_SUM_CAPA:
 NASA_OUTDOOR_SAFETY_START:
   address: '0x8248'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -5013,6 +5417,7 @@ NASA_OUTDOOR_SERVICEOPERATION:
     1: 'ON'
     255: 'OFF'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -5024,6 +5429,7 @@ NASA_OUTDOOR_SETUP_INFO:
   address: '0x860F'
   description: Structure Type
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5033,6 +5439,7 @@ NASA_OUTDOOR_SETUP_INFO:
 NASA_OUTDOOR_SNOW_LEVEL:
   address: '0x82D3'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5042,6 +5449,7 @@ NASA_OUTDOOR_SUBMICOM:
   address: '0x8601'
   description: Structure Type
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5052,6 +5460,7 @@ NASA_OUTDOOR_SUB_COND_EEV_STEP:
   address: '0x82D2'
   description: Sub EEV
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5064,6 +5473,7 @@ NASA_OUTDOOR_SUB_COND_OVER_HEAT:
   arithmetic: value / 10
   description: Sub heat exchanger outlet superheat
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5076,6 +5486,7 @@ NASA_OUTDOOR_SUCTION1_TEMP:
   arithmetic: value / 10
   description: Suction temperature
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -5089,6 +5500,7 @@ NASA_OUTDOOR_SUCTION2_TEMP:
   address: '0x829A'
   arithmetic: value / 10
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -5103,6 +5515,7 @@ NASA_OUTDOOR_SUCTION_OVER_HEAT:
   arithmetic: value / 10
   description: Suction superheat
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5113,6 +5526,7 @@ NASA_OUTDOOR_SUCTION_OVER_HEAT:
 NASA_OUTDOOR_SUMPTEMP:
   address: '0x8210'
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -5126,6 +5540,7 @@ NASA_OUTDOOR_SYSTEM_RESET:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -5138,6 +5553,7 @@ NASA_OUTDOOR_TARGET_DISCHARGE:
   arithmetic: value / 10
   description: Target discharge temperature
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -5153,6 +5569,7 @@ NASA_OUTDOOR_TEST_OP_COMPLETE:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -5165,6 +5582,7 @@ NASA_OUTDOOR_TOP_SENSOR_TEMP1:
   arithmetic: value / 10
   description: Top1
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -5179,6 +5597,7 @@ NASA_OUTDOOR_TOP_SENSOR_TEMP2:
   arithmetic: value / 10
   description: Top2
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -5192,6 +5611,7 @@ NASA_OUTDOOR_TOP_SENSOR_TEMP3:
   address: '0x8282'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -5204,6 +5624,7 @@ NASA_OUTDOOR_TW1_TEMP:
   arithmetic: value / 10
   description: Water In 1 for EHS
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -5218,6 +5639,7 @@ NASA_OUTDOOR_TW2_TEMP:
   arithmetic: value / 10
   description: Water In 2 for EHS
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -5230,6 +5652,7 @@ NASA_OUTDOOR_TW2_TEMP:
 NASA_OUTDOOR_UPL_TP_COOL:
   address: '0x82D5'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -5238,6 +5661,7 @@ NASA_OUTDOOR_UPL_TP_COOL:
 NASA_OUTDOOR_UPL_TP_HEAT:
   address: '0x82D6'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -5246,6 +5670,7 @@ NASA_OUTDOOR_UPL_TP_HEAT:
 NASA_OUTDOOR_VARIABLE_SETUP_INFO:
   address: '0x8417'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -5257,6 +5682,7 @@ NASA_OUTDOOR_WATER_TEMP:
   arithmetic: value / 10
   description: Water Temperature
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -5273,6 +5699,7 @@ NASA_OUTDOOR_WATER_VALVE:
     1: 'ON'
   description: 2Way Valve
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -5283,6 +5710,7 @@ NASA_OUTDOOR_WATER_VALVE:
 NASA_PBAOPTION:
   address: '0x0604'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5291,6 +5719,7 @@ NASA_PBAOPTION:
 NASA_PEAK_CONTROL_PERIOD:
   address: '0x0010'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5299,6 +5728,7 @@ NASA_PEAK_CONTROL_PERIOD:
 NASA_PEAK_CURRENT_DEMAND:
   address: '0x0444'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5307,6 +5737,7 @@ NASA_PEAK_CURRENT_DEMAND:
 NASA_PEAK_CURRENT_TARGET_DEMAND:
   address: '0x0437'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5315,6 +5746,7 @@ NASA_PEAK_CURRENT_TARGET_DEMAND:
 NASA_PEAK_FORCAST_DEMAND:
   address: '0x0438'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5323,6 +5755,7 @@ NASA_PEAK_FORCAST_DEMAND:
 NASA_PEAK_LEVEL:
   address: '0x000E'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5331,6 +5764,7 @@ NASA_PEAK_LEVEL:
 NASA_PEAK_MODE:
   address: '0x000F'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5339,6 +5773,7 @@ NASA_PEAK_MODE:
 NASA_PEAK_RATIO_CURRENT:
   address: '0x0434'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5347,6 +5782,7 @@ NASA_PEAK_RATIO_CURRENT:
 NASA_PEAK_RATIO_POTENTIAL:
   address: '0x0435'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5355,6 +5791,7 @@ NASA_PEAK_RATIO_POTENTIAL:
 NASA_PEAK_REAL_VALUE:
   address: '0x0445'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5363,6 +5800,7 @@ NASA_PEAK_REAL_VALUE:
 NASA_PEAK_SYNC_TIME:
   address: '0x0443'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5371,6 +5809,7 @@ NASA_PEAK_SYNC_TIME:
 NASA_PEAK_TARGET_DEMAND:
   address: '0x0214'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5379,6 +5818,7 @@ NASA_PEAK_TARGET_DEMAND:
 NASA_PEAK_TARGET_POWER:
   address: '0x043A'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5387,6 +5827,7 @@ NASA_PEAK_TARGET_POWER:
 NASA_PEAK_TOP_DEMAND:
   address: '0x0439'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5395,6 +5836,7 @@ NASA_PEAK_TOP_DEMAND:
 NASA_PEAK_TOTAL_POWER:
   address: '0x0436'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5403,6 +5845,7 @@ NASA_PEAK_TOTAL_POWER:
 NASA_PNP:
   address: '0x2004'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -5413,6 +5856,7 @@ NASA_PNP_CONFIRM_ADDRESS:
   address: '0x0417'
   description: PNP only
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -5423,6 +5867,7 @@ NASA_PNP_NET_ADDRESS:
   address: '0x0217'
   description: PNP only
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -5432,6 +5877,7 @@ NASA_PNP_RANDOM_ADDRESS:
   address: '0x0418'
   description: PNP only
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -5442,6 +5888,7 @@ NASA_PNP_SETUP_ADDRESS:
   address: '0x0419'
   description: PNP only
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -5456,6 +5903,7 @@ NASA_POWER:
     1: 'ON'
     2: On Alternate
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -5469,6 +5917,7 @@ NASA_POWER:
 NASA_POWER_CHANNEL1_ELECTRIC_VALUE:
   address: '0x041C'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5477,6 +5926,7 @@ NASA_POWER_CHANNEL1_ELECTRIC_VALUE:
 NASA_POWER_CHANNEL1_PULSEVALUE:
   address: '0x043B'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5485,6 +5935,7 @@ NASA_POWER_CHANNEL1_PULSEVALUE:
 NASA_POWER_CHANNEL1_TYPE:
   address: '0x0012'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5493,6 +5944,7 @@ NASA_POWER_CHANNEL1_TYPE:
 NASA_POWER_CHANNEL1_USED:
   address: '0x001A'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5501,6 +5953,7 @@ NASA_POWER_CHANNEL1_USED:
 NASA_POWER_CHANNEL2_ELECTRIC_VALUE:
   address: '0x041D'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5509,6 +5962,7 @@ NASA_POWER_CHANNEL2_ELECTRIC_VALUE:
 NASA_POWER_CHANNEL2_PULSEVALUE:
   address: '0x043C'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5517,6 +5971,7 @@ NASA_POWER_CHANNEL2_PULSEVALUE:
 NASA_POWER_CHANNEL2_TYPE:
   address: '0x0013'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5525,6 +5980,7 @@ NASA_POWER_CHANNEL2_TYPE:
 NASA_POWER_CHANNEL2_USED:
   address: '0x001B'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5533,6 +5989,7 @@ NASA_POWER_CHANNEL2_USED:
 NASA_POWER_CHANNEL3_ELECTRIC_VALUE:
   address: '0x041E'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5541,6 +5998,7 @@ NASA_POWER_CHANNEL3_ELECTRIC_VALUE:
 NASA_POWER_CHANNEL3_PULSEVALUE:
   address: '0x043D'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5549,6 +6007,7 @@ NASA_POWER_CHANNEL3_PULSEVALUE:
 NASA_POWER_CHANNEL3_TYPE:
   address: '0x0014'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5557,6 +6016,7 @@ NASA_POWER_CHANNEL3_TYPE:
 NASA_POWER_CHANNEL3_USED:
   address: '0x001C'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5565,6 +6025,7 @@ NASA_POWER_CHANNEL3_USED:
 NASA_POWER_CHANNEL4_ELECTRIC_VALUE:
   address: '0x041F'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5573,6 +6034,7 @@ NASA_POWER_CHANNEL4_ELECTRIC_VALUE:
 NASA_POWER_CHANNEL4_PULSEVALUE:
   address: '0x043E'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5581,6 +6043,7 @@ NASA_POWER_CHANNEL4_PULSEVALUE:
 NASA_POWER_CHANNEL4_TYPE:
   address: '0x0015'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5589,6 +6052,7 @@ NASA_POWER_CHANNEL4_TYPE:
 NASA_POWER_CHANNEL4_USED:
   address: '0x001D'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5597,6 +6061,7 @@ NASA_POWER_CHANNEL4_USED:
 NASA_POWER_CHANNEL5_ELECTRIC_VALUE:
   address: '0x0420'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5605,6 +6070,7 @@ NASA_POWER_CHANNEL5_ELECTRIC_VALUE:
 NASA_POWER_CHANNEL5_PULSEVALUE:
   address: '0x043F'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5613,6 +6079,7 @@ NASA_POWER_CHANNEL5_PULSEVALUE:
 NASA_POWER_CHANNEL5_TYPE:
   address: '0x0016'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5621,6 +6088,7 @@ NASA_POWER_CHANNEL5_TYPE:
 NASA_POWER_CHANNEL5_USED:
   address: '0x001E'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5629,6 +6097,7 @@ NASA_POWER_CHANNEL5_USED:
 NASA_POWER_CHANNEL6_ELECTRIC_VALUE:
   address: '0x0421'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5637,6 +6106,7 @@ NASA_POWER_CHANNEL6_ELECTRIC_VALUE:
 NASA_POWER_CHANNEL6_PULSEVALUE:
   address: '0x0440'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5645,6 +6115,7 @@ NASA_POWER_CHANNEL6_PULSEVALUE:
 NASA_POWER_CHANNEL6_TYPE:
   address: '0x0017'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5653,6 +6124,7 @@ NASA_POWER_CHANNEL6_TYPE:
 NASA_POWER_CHANNEL6_USED:
   address: '0x001F'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5661,6 +6133,7 @@ NASA_POWER_CHANNEL6_USED:
 NASA_POWER_CHANNEL7_ELECTRIC_VALUE:
   address: '0x0422'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5669,6 +6142,7 @@ NASA_POWER_CHANNEL7_ELECTRIC_VALUE:
 NASA_POWER_CHANNEL7_PULSEVALUE:
   address: '0x0441'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5677,6 +6151,7 @@ NASA_POWER_CHANNEL7_PULSEVALUE:
 NASA_POWER_CHANNEL7_TYPE:
   address: '0x0018'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5685,6 +6160,7 @@ NASA_POWER_CHANNEL7_TYPE:
 NASA_POWER_CHANNEL7_USED:
   address: '0x0020'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5693,6 +6169,7 @@ NASA_POWER_CHANNEL7_USED:
 NASA_POWER_CHANNEL8_ELECTRIC_VALUE:
   address: '0x0423'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5701,6 +6178,7 @@ NASA_POWER_CHANNEL8_ELECTRIC_VALUE:
 NASA_POWER_CHANNEL8_PULSEVALUE:
   address: '0x0442'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5709,6 +6187,7 @@ NASA_POWER_CHANNEL8_PULSEVALUE:
 NASA_POWER_CHANNEL8_TYPE:
   address: '0x0019'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5717,6 +6196,7 @@ NASA_POWER_CHANNEL8_TYPE:
 NASA_POWER_CHANNEL8_USED:
   address: '0x0021'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5725,6 +6205,7 @@ NASA_POWER_CHANNEL8_USED:
 NASA_POWER_MANUFACTURE:
   address: '0x0011'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5733,6 +6214,7 @@ NASA_POWER_MANUFACTURE:
 NASA_PRODUCT_MODEL_NAME:
   address: '0x061A'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5743,6 +6225,7 @@ NASA_PRODUCT_MODEL_NAME:
 NASA_PRODUCT_OPTION:
   address: '0x0600'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -5752,6 +6235,7 @@ NASA_PRODUCT_OPTION:
 NASA_RANDOM_ADDRESS:
   address: '0x0403'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5760,6 +6244,7 @@ NASA_RANDOM_ADDRESS:
 NASA_RMCADDRESS:
   address: '0x0402'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -5772,6 +6257,7 @@ NASA_SERIAL_NO:
   address: '0x0607'
   description: OutdoorTableSerialNumber
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5781,6 +6267,7 @@ NASA_SERIAL_NO:
 NASA_SETUP_ADDRESS:
   address: '0x0408'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5791,6 +6278,7 @@ NASA_SETUP_ADDRESS:
 NASA_SET_DISCHARGE:
   address: '0x4209'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5801,6 +6289,7 @@ NASA_SET_TEMP:
   arithmetic: value / 10
   description: Indoor unit set temperature
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -5815,6 +6304,7 @@ NASA_SET_TEMP:
 NASA_SIMPIM_PASSWORD:
   address: '0x0619'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5823,6 +6313,7 @@ NASA_SIMPIM_PASSWORD:
 NASA_SIMPIM_SYNC_DATETIME:
   address: '0x0613'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5835,6 +6326,7 @@ NASA_SMART_GRID:
     1: 'ON'
   description: Smart Grid
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -5849,6 +6341,7 @@ NASA_SOLAR_PUMP:
     1: 'ON'
   description: Hydro_SolarPump
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -5859,6 +6352,7 @@ NASA_SOLAR_PUMP:
 NASA_STANDBY_MODE:
   address: '0x0023'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5870,6 +6364,7 @@ NASA_TRACKING_RESULT:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -5881,6 +6376,7 @@ NASA_USE_CENTUAL_CONTROL:
   address: '0x401B'
   description: Income from InstallOption information.
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -5890,6 +6386,7 @@ NASA_USE_CENTUAL_CONTROL:
 NASA_USE_DESIRED_HUMIDITY:
   address: '0x405D'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5902,6 +6399,7 @@ NASA_USE_DISCHARGE_TEMP:
     1: 'ON'
   description: This value is a value that cannot be controlled by the upper controller.
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -5912,6 +6410,7 @@ NASA_USE_DISCHARGE_TEMP:
 NASA_USE_FILTER_WARNING_TIME:
   address: '0x4024'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -5921,6 +6420,7 @@ NASA_USE_FILTER_WARNING_TIME:
 NASA_USE_HUMIDIFICATION:
   address: '0x4040'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5929,6 +6429,7 @@ NASA_USE_HUMIDIFICATION:
 NASA_USE_MDS:
   address: '0x403E'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5937,6 +6438,7 @@ NASA_USE_MDS:
 NASA_USE_OUTER_COOL:
   address: '0x405B'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5945,6 +6447,7 @@ NASA_USE_OUTER_COOL:
 NASA_USE_SILENCE:
   address: '0x4045'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -5953,6 +6456,7 @@ NASA_USE_SILENCE:
 NASA_USE_SPI:
   address: '0x4023'
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -5965,6 +6469,7 @@ NASA_USE_VACANCY_STATUS:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -5978,6 +6483,7 @@ NASA_USE_WIREDREMOTE:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -5988,6 +6494,7 @@ NASA_USE_WIREDREMOTE:
 NASA_VACANCY_SETTING:
   address: '0x4418'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -6002,6 +6509,7 @@ NASA_VACANCY_STATUS:
     0: Unoccupied
     1: Occupied
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       options:
@@ -6014,6 +6522,7 @@ STR_AD_ID_MODEL_NAME:
   address: '0x061F'
   description: Model Name
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -6025,6 +6534,7 @@ STR_AD_PRODUCT_MAC_ADDRESS:
   address: '0x061C'
   description: WiFi Kit MAC Address
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -6035,6 +6545,7 @@ STR_IN_ERROR_HISTORY_FOR_HASS:
   address: '0x461E'
   description: Structure Type
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -6045,6 +6556,7 @@ STR_OUT_BASE_OPTION:
   address: '0x860A'
   description: Structure Type
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -6055,6 +6567,7 @@ STR_OUT_REF_CHECK_INFO:
   address: '0x8613'
   description: Structure Type
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -6065,6 +6578,7 @@ VAR_IN_CAPACITY_VENTILATION_REQUEST:
   address: '0x4302'
   arithmetic: value / 8.5
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: power
     platform:
@@ -6079,6 +6593,7 @@ VAR_IN_CHILLER_EXTERNAL_TEMPERATURE:
   arithmetic: value / 10
   description: External sensor-Room temperature
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6093,6 +6608,7 @@ VAR_IN_CHILLER_PHE_IN_P:
   arithmetic: (value / 100) * 0.980665
   description: Inlet pressure
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: pressure
     platform:
@@ -6107,6 +6623,7 @@ VAR_IN_CHILLER_PHE_OUT_P:
   arithmetic: (value / 100) * 0.980665
   description: Outlet pressure
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: pressure
     platform:
@@ -6119,6 +6636,7 @@ VAR_IN_CHILLER_PHE_OUT_P:
 VAR_IN_DUST_SENSOR_PM10_0_VALUE:
   address: '0x42D1'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -6129,6 +6647,7 @@ VAR_IN_DUST_SENSOR_PM10_0_VALUE:
 VAR_IN_DUST_SENSOR_PM1_0_VALUE:
   address: '0x42D3'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -6139,6 +6658,7 @@ VAR_IN_DUST_SENSOR_PM1_0_VALUE:
 VAR_IN_DUST_SENSOR_PM2_5_VALUE:
   address: '0x42D2'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -6150,6 +6670,7 @@ VAR_IN_ENTHALPY_SENSOR_OUTPUT:
   address: '0x42CF'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -6161,6 +6682,7 @@ VAR_IN_ENTHALPY_SENSOR_OUTPUT:
 VAR_IN_EXT_VARIABLE_DAMPER_OUTPUT:
   address: '0x42D0'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -6171,6 +6693,7 @@ VAR_IN_EXT_VARIABLE_DAMPER_OUTPUT:
 VAR_IN_FAN_CURRENT_RPM_SUCTION1:
   address: '0x429F'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -6183,6 +6706,7 @@ VAR_IN_FAN_CURRENT_RPM_SUCTION1:
 VAR_IN_FAN_CURRENT_RPM_SUCTION2:
   address: '0x42A1'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -6195,6 +6719,7 @@ VAR_IN_FAN_CURRENT_RPM_SUCTION2:
 VAR_IN_FAN_CURRENT_RPM_SUCTION3:
   address: '0x42A3'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -6209,6 +6734,7 @@ VAR_IN_FLOW_SENSOR_CALC:
   arithmetic: value / 10
   description: Flow Sensor
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: volume_flow_rate
     platform:
@@ -6224,6 +6750,7 @@ VAR_IN_FLOW_SENSOR_VOLTAGE:
   arithmetic: value / 10
   reverse-arithmetic: value * 10
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: voltage
     platform:
@@ -6239,6 +6766,7 @@ VAR_IN_FSV_1011:
   reverse-arithmetic: value * 10
   description: User limitation - Water Cooling Temperature Max.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6255,6 +6783,7 @@ VAR_IN_FSV_1012:
   arithmetic: value / 10
   reverse-arithmetic: value * 10
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6273,6 +6802,7 @@ VAR_IN_FSV_1021:
   reverse-arithmetic: value * 10
   description: User limitation - Room Cooling Temperature Max.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6290,6 +6820,7 @@ VAR_IN_FSV_1022:
   arithmetic: value / 10
   reverse-arithmetic: value * 10
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6308,6 +6839,7 @@ VAR_IN_FSV_1031:
   reverse-arithmetic: value * 10
   description: User limitation - Water Heating Temperature Max.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6325,6 +6857,7 @@ VAR_IN_FSV_1032:
   arithmetic: value / 10
   reverse-arithmetic: value * 10
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6343,6 +6876,7 @@ VAR_IN_FSV_1041:
   reverse-arithmetic: value * 10
   description: User limitation - Room heating Temperature Max.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6360,6 +6894,7 @@ VAR_IN_FSV_1042:
   arithmetic: value / 10
   reverse-arithmetic: value * 10
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6378,6 +6913,7 @@ VAR_IN_FSV_1051:
   reverse-arithmetic: value * 10
   description: User limitation - Hot Water Temperature Max.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6395,6 +6931,7 @@ VAR_IN_FSV_1052:
   arithmetic: value / 10
   reverse-arithmetic: value * 10
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6412,6 +6949,7 @@ VAR_IN_FSV_1061:
   arithmetic: value / 10
   reverse-arithmetic: value * 10
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6429,6 +6967,7 @@ VAR_IN_FSV_1062:
   arithmetic: value / 10
   reverse-arithmetic: value * 10
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6446,6 +6985,7 @@ VAR_IN_FSV_1063:
   arithmetic: value / 10
   reverse-arithmetic: value * 10
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6463,6 +7003,7 @@ VAR_IN_FSV_1064:
   arithmetic: value / 10
   reverse-arithmetic: value * 10
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6481,6 +7022,7 @@ VAR_IN_FSV_2011:
   reverse-arithmetic: value * 10
   description: Heating - Outdoor Temp. for WL Max.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6499,6 +7041,7 @@ VAR_IN_FSV_2012:
   reverse-arithmetic: value * 10
   description: Heating - Outdoor Temp. for WL Min.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6517,6 +7060,7 @@ VAR_IN_FSV_2021:
   reverse-arithmetic: value * 10
   description: Heating - Water out Temp. UFH Max.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6535,6 +7079,7 @@ VAR_IN_FSV_2022:
   reverse-arithmetic: value * 10
   description: Heating - Water out Temp. UFH Min.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6553,6 +7098,7 @@ VAR_IN_FSV_2031:
   reverse-arithmetic: value * 10
   description: Heating - Water out Temp. FCU Max.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6571,6 +7117,7 @@ VAR_IN_FSV_2032:
   reverse-arithmetic: value * 10
   description: Heating - Water out Temp. FCU Min.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6589,6 +7136,7 @@ VAR_IN_FSV_2051:
   reverse-arithmetic: value * 10
   description: Cooling - Outdoor Temp. for WL Max.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6607,6 +7155,7 @@ VAR_IN_FSV_2052:
   reverse-arithmetic: value * 10
   description: Cooling - Outdoor Temp. for WL Min.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6625,6 +7174,7 @@ VAR_IN_FSV_2061:
   reverse-arithmetic: value * 10
   description: Cooling - Water out Temp. UFH Max.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6643,6 +7193,7 @@ VAR_IN_FSV_2062:
   reverse-arithmetic: value * 10
   description: Cooling - Water out Temp. UFH Min.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6661,6 +7212,7 @@ VAR_IN_FSV_2071:
   reverse-arithmetic: value * 10
   description: Cooling - Water out Temp. FCU Max.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6679,6 +7231,7 @@ VAR_IN_FSV_2072:
   reverse-arithmetic: value * 10
   description: Cooling - Water out Temp. FCU Min.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6697,6 +7250,7 @@ VAR_IN_FSV_3021:
   reverse-arithmetic: value * 10
   description: DHW - Heat Pump Max. temp.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6715,6 +7269,7 @@ VAR_IN_FSV_3022:
   reverse-arithmetic: value * 10
   description: DHW - Heat Pump Stop
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6733,6 +7288,7 @@ VAR_IN_FSV_3023:
   reverse-arithmetic: value * 10
   description: DHW - Heat Pump Start
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6749,6 +7305,7 @@ VAR_IN_FSV_3024:
   address: '0x4263'
   description: DHW - Heat Pump Min. Space heating operation time
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: duration
     platform:
@@ -6765,6 +7322,7 @@ VAR_IN_FSV_3025:
   address: '0x4264'
   description: DHW - Heat Pump Max. DHW operation time
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: duration
     platform:
@@ -6783,6 +7341,7 @@ VAR_IN_FSV_3026:
   arithmetic: value / 60
   reverse-arithmetic: value * 60
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: duration
     platform:
@@ -6799,6 +7358,7 @@ VAR_IN_FSV_3032:
   address: '0x4266'
   description: DHW - Booster Heat Delay Time
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: duration
     platform:
@@ -6817,6 +7377,7 @@ VAR_IN_FSV_3033:
   reverse-arithmetic: value * 10
   description: DHW - Booster Heat Overshoot
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6833,6 +7394,7 @@ VAR_IN_FSV_3034:
   address: '0x4268'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6847,6 +7409,7 @@ VAR_IN_FSV_3043:
   address: '0x4269'
   description: DHW - Disinfection Start Time
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: duration
     platform:
@@ -6865,6 +7428,7 @@ VAR_IN_FSV_3044:
   reverse-arithmetic: value * 10
   description: DHW - Disinfection Target Temp.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -6881,6 +7445,7 @@ VAR_IN_FSV_3045:
   address: '0x426B'
   description: DHW - Disinfection Duration
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: duration
     platform:
@@ -6899,6 +7464,7 @@ VAR_IN_FSV_3046:
   reverse-arithmetic: value * 60
   description: DHW - Disinfection Max time
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: duration
     platform:
@@ -6918,6 +7484,7 @@ VAR_IN_FSV_3052:
   reverse-arithmetic: value / 10
   description: DHW - Forced DHW Operation Time Duration
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: duration
     platform:
@@ -6934,6 +7501,7 @@ VAR_IN_FSV_3081:
   address: '0x42ED'
   description: DHW - Energy Metering BUH 1 step capacity
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: power
     platform:
@@ -6950,6 +7518,7 @@ VAR_IN_FSV_3082:
   address: '0x42EE'
   description: DHW - Energy Metering BUH 2 step capacity
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: power
     platform:
@@ -6966,6 +7535,7 @@ VAR_IN_FSV_3083:
   address: '0x42EF'
   description: DHW - Energy Metering BSH capacity
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: power
     platform:
@@ -6984,6 +7554,7 @@ VAR_IN_FSV_4012:
   reverse-arithmetic: value * 10
   description: Heating - Heat Pump Outdoor Temp. for Priority
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7002,6 +7573,7 @@ VAR_IN_FSV_4013:
   reverse-arithmetic: value * 10
   description: Heating - Heat Pump Outdoor Heat OFF
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7018,6 +7590,7 @@ VAR_IN_FSV_4014:
   address: '0x426F'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7033,6 +7606,7 @@ VAR_IN_FSV_4024:
   reverse-arithmetic: value * 10
   description: Heating - Backup Heater Threshold Temp.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7051,6 +7625,7 @@ VAR_IN_FSV_4025:
   reverse-arithmetic: value * 10
   description: Heating - Backup Heater Defrost Backup Temp.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7069,6 +7644,7 @@ VAR_IN_FSV_4033:
   reverse-arithmetic: value * 10
   description: Heating - Backup Boiler Threshold Temp.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7087,6 +7663,7 @@ VAR_IN_FSV_4042:
   reverse-arithmetic: value * 10
   description: Heating - Mixing Valve Target Delta Heating
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7105,6 +7682,7 @@ VAR_IN_FSV_4043:
   reverse-arithmetic: value * 10
   description: Heating - Mixing Valve Target Delta Cooling
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7121,6 +7699,7 @@ VAR_IN_FSV_4045:
   address: '0x4288'
   description: Heating - Mixing Valve Control Interval
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: duration
     platform:
@@ -7139,6 +7718,7 @@ VAR_IN_FSV_4046:
   reverse-arithmetic: value / 10
   description: Heating - Mixing Valve Running Time
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: duration
     platform:
@@ -7157,6 +7737,7 @@ VAR_IN_FSV_4052:
   reverse-arithmetic: value * 10
   description: Heating - Inverter Pump Target Delta
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7175,6 +7756,7 @@ VAR_IN_FSV_5011:
   reverse-arithmetic: value * 10
   description: Outing Mode - Water Out Temp. for Cooling
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7193,6 +7775,7 @@ VAR_IN_FSV_5012:
   reverse-arithmetic: value * 10
   description: Outing mode - Room Temp. for Cooling
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7211,6 +7794,7 @@ VAR_IN_FSV_5013:
   reverse-arithmetic: value * 10
   description: Outing mode - Water Out Temp. for Heating
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7229,6 +7813,7 @@ VAR_IN_FSV_5014:
   reverse-arithmetic: value * 10
   description: Outing mode - Room Temp. for Heating
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7247,6 +7832,7 @@ VAR_IN_FSV_5015:
   reverse-arithmetic: value * 10
   description: Outing mode - Auto Cooling WL1 Temp.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7265,6 +7851,7 @@ VAR_IN_FSV_5016:
   reverse-arithmetic: value * 10
   description: Outing mode - Auto Cooling WL2 Temp.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7283,6 +7870,7 @@ VAR_IN_FSV_5017:
   reverse-arithmetic: value * 10
   description: Outing mode - Auto Heating WL1 Temp
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7301,6 +7889,7 @@ VAR_IN_FSV_5018:
   reverse-arithmetic: value * 10
   description: Outing mode - Auto Heating WL2 Temp
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7319,6 +7908,7 @@ VAR_IN_FSV_5019:
   reverse-arithmetic: value * 10
   description: Outing mode - Target Tank Temp
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7337,6 +7927,7 @@ VAR_IN_FSV_5021:
   reverse-arithmetic: value * 10
   description: DHW Saving - DHW Saving Temp.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7355,6 +7946,7 @@ VAR_IN_FSV_5023:
   reverse-arithmetic: value * 10
   description: DHW Saving - DHW Saving Thermo on Temp.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7370,6 +7962,7 @@ VAR_IN_FSV_5023:
 VAR_IN_FSV_5031:
   address: '0x427D'
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: duration
     platform:
@@ -7385,6 +7978,7 @@ VAR_IN_FSV_5031:
 VAR_IN_FSV_5032:
   address: '0x427E'
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: duration
     platform:
@@ -7403,6 +7997,7 @@ VAR_IN_FSV_5082:
   reverse-arithmetic: value * 10
   description: PV Control - Setting Temp. Shift Value (Cool)
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7421,6 +8016,7 @@ VAR_IN_FSV_5083:
   reverse-arithmetic: value * 10
   description: PV Control - Setting Temp. Shift Value (Heat)
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7439,6 +8035,7 @@ VAR_IN_FSV_5092:
   reverse-arithmetic: value * 10
   description: Smart Grid Control - Setting Temp. Shift Value (Heat)
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7457,6 +8054,7 @@ VAR_IN_FSV_5093:
   reverse-arithmetic: value * 10
   description: Smart Grid Control - Setting Temp. Shift Value (DHW)
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7472,6 +8070,7 @@ VAR_IN_FSV_5093:
 VAR_IN_MCC_GROUP_MAIN:
   address: '0x42B2'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -7482,6 +8081,7 @@ VAR_IN_MCC_GROUP_MAIN:
 VAR_IN_MCC_GROUP_MODULE_ADDRESS:
   address: '0x42B1'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -7492,6 +8092,7 @@ VAR_IN_MCC_GROUP_MODULE_ADDRESS:
 VAR_IN_MCC_MODULE_MAIN:
   address: '0x42B3'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -7502,6 +8103,7 @@ VAR_IN_MCC_MODULE_MAIN:
 VAR_IN_MODULATING_FAN:
   address: '0x42CC'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -7512,6 +8114,7 @@ VAR_IN_MODULATING_FAN:
 VAR_IN_MODULATING_VALVE_1:
   address: '0x42CA'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -7522,6 +8125,7 @@ VAR_IN_MODULATING_VALVE_1:
 VAR_IN_MODULATING_VALVE_2:
   address: '0x42CB'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -7533,6 +8137,7 @@ VAR_IN_SENSOR_CO2_PPM:
   address: '0x421B'
   description: CO2 sensor detection ppm
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -7545,6 +8150,7 @@ VAR_IN_TEMP_ELECTRIC_HEATER_F:
   arithmetic: subtract 55
   description: Electric heater temperature value
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7559,6 +8165,7 @@ VAR_IN_TEMP_EVA2_IN_F:
   arithmetic: value / 10
   description: Indoor Eva2 In temperature
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7573,6 +8180,7 @@ VAR_IN_TEMP_EVA2_OUT_F:
   arithmetic: value / 10
   description: Indoor Eva2 Out Temperature
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7587,6 +8195,7 @@ VAR_IN_TEMP_MIXING_VALVE_F:
   arithmetic: value / 10
   description: Hydro_MixingValve
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7600,6 +8209,7 @@ VAR_IN_TEMP_PANEL_AIR_COOL1_F:
   address: '0x42A5'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7613,6 +8223,7 @@ VAR_IN_TEMP_PANEL_AIR_COOL2_F:
   address: '0x42A6'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7626,6 +8237,7 @@ VAR_IN_TEMP_PANEL_AIR_HEAT1_F:
   address: '0x42AB'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7639,6 +8251,7 @@ VAR_IN_TEMP_PANEL_AIR_HEAT2_F:
   address: '0x42AC'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7652,6 +8265,7 @@ VAR_IN_TEMP_PANEL_ROOM_COOL1_F:
   address: '0x42A7'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7665,6 +8279,7 @@ VAR_IN_TEMP_PANEL_ROOM_COOL2_F:
   address: '0x42A8'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7678,6 +8293,7 @@ VAR_IN_TEMP_PANEL_ROOM_HEAT1_F:
   address: '0x42AD'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7691,6 +8307,7 @@ VAR_IN_TEMP_PANEL_ROOM_HEAT2_F:
   address: '0x42AE'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7704,6 +8321,7 @@ VAR_IN_TEMP_PANEL_TARGET_COOL1_F:
   address: '0x42A9'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7717,6 +8335,7 @@ VAR_IN_TEMP_PANEL_TARGET_COOL2_F:
   address: '0x42AA'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7730,6 +8349,7 @@ VAR_IN_TEMP_PANEL_TARGET_HEAT1_F:
   address: '0x42AF'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7743,6 +8363,7 @@ VAR_IN_TEMP_PANEL_TARGET_HEAT2_F:
   address: '0x42B0'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7758,6 +8379,7 @@ VAR_IN_TEMP_TARGET_ZONE2_F:
   reverse-arithmetic: value * 10
   description: Zone2 Room Set Temp.
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7771,6 +8393,7 @@ VAR_IN_TEMP_WATER_IN2_F:
   address: '0x42CD'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7785,6 +8408,7 @@ VAR_IN_TEMP_WATER_LAW_F:
   arithmetic: value / 10
   description: Hydro_WaterLawTargetF
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7799,6 +8423,7 @@ VAR_IN_TEMP_WATER_LAW_TARGET_F:
   arithmetic: value / 10
   reverse-arithmetic: value * 10
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7816,6 +8441,7 @@ VAR_IN_TEMP_WATER_OUT2_F:
   arithmetic: value / 10
   description: Hydro_HeaterOut
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7831,6 +8457,7 @@ VAR_IN_TEMP_WATER_OUTLET_TARGET_ZONE2_F:
   reverse-arithmetic: value * 10
   description: Set Temp Waterout Heating Mode Zone 2
   hass_opts:
+      known: true
       default_platform: sensor
       device_class: temperature
       platform:
@@ -7848,6 +8475,7 @@ VAR_IN_TEMP_WATER_OUTLET_ZONE1_F:
   arithmetic: value / 10
   description: Zone1 WaterOut Temp
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7863,6 +8491,7 @@ VAR_IN_TEMP_WATER_OUTLET_ZONE2_F:
   reverse-arithmetic: value * 10
   description: Zone2 WaterOut Temp
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7877,6 +8506,7 @@ VAR_IN_TEMP_ROOM_ZONE1:
   arithmetic: value / 10
   description: Idiom_RoomTemp_Zone1
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7895,6 +8525,7 @@ VAR_IN_TEMP_ROOM_ZONE2:
   arithmetic: value / 10
   description: Idiom_RoomTemp_Zone2
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7926,6 +8557,7 @@ VAR_OUT_COMP_FREQ_RATE_CONTROL:
     406: 150%
   description: Compressor frequency rate control for fsv 5051
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       options:
@@ -7950,6 +8582,7 @@ VAR_OUT_CONTROL_DSH1:
   arithmetic: value / 10
   description: Just for EHS HTU
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: temperature
     platform:
@@ -7963,6 +8596,7 @@ VAR_OUT_CONTROL_IDU_TOTAL_ABSCAPA:
   address: '0x82A8'
   arithmetic: value / 8.5
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -7975,6 +8609,7 @@ VAR_OUT_CONTROL_REFRIGERANTS_VOLUME:
   arithmetic: value / 10
   description: Refrigerant amount
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -7986,6 +8621,7 @@ VAR_OUT_ERROR_CODE:
   address: '0x8235'
   description: HTU error code
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -7997,6 +8633,7 @@ VAR_OUT_HIGH_OVERLOAD_DETECT:
   address: '0x82F5'
   description: PFCM#1 element temperature
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -8008,6 +8645,7 @@ VAR_OUT_INSTALL_COMP_NUM:
   address: '0x8202'
   description: Number of outdoor unit compressors
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8018,6 +8656,7 @@ VAR_OUT_INSTALL_COMP_NUM:
 VAR_OUT_INSTALL_COND_SIZE:
   address: '0x82AF'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -8029,6 +8668,7 @@ VAR_OUT_LOAD_EVI_SOL_EEV:
   address: '0x82FC'
   description: EVI SOL EEV
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8040,6 +8680,7 @@ VAR_OUT_LOAD_MCU_HR_BYPASS_EEV:
   address: '0x82E8'
   description: MCU HR Bypass EEV opening diagram
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8050,6 +8691,7 @@ VAR_OUT_LOAD_MCU_HR_BYPASS_EEV:
 VAR_OUT_MCU_CHANGE_OVER_EEV1:
   address: '0x826E'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -8060,6 +8702,7 @@ VAR_OUT_MCU_CHANGE_OVER_EEV1:
 VAR_OUT_MCU_CHANGE_OVER_EEV2:
   address: '0x826F'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -8070,6 +8713,7 @@ VAR_OUT_MCU_CHANGE_OVER_EEV2:
 VAR_OUT_MCU_CHANGE_OVER_EEV3:
   address: '0x8270'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -8080,6 +8724,7 @@ VAR_OUT_MCU_CHANGE_OVER_EEV3:
 VAR_OUT_MCU_CHANGE_OVER_EEV4:
   address: '0x8271'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -8090,6 +8735,7 @@ VAR_OUT_MCU_CHANGE_OVER_EEV4:
 VAR_OUT_MCU_CHANGE_OVER_EEV5:
   address: '0x8272'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -8100,6 +8746,7 @@ VAR_OUT_MCU_CHANGE_OVER_EEV5:
 VAR_OUT_MCU_CHANGE_OVER_EEV6:
   address: '0x8273'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -8111,6 +8758,7 @@ VAR_OUT_MCU_SENSOR_SUBCOOLER_IN:
   address: '0x826B'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -8124,6 +8772,7 @@ VAR_OUT_MCU_SENSOR_SUBCOOLER_OUT:
   address: '0x826C'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -8136,6 +8785,7 @@ VAR_OUT_MCU_SENSOR_SUBCOOLER_OUT:
 VAR_OUT_MCU_SUBCOOLER_EEV:
   address: '0x826D'
   hass_opts:
+    known: false
     default_platform: sensor
     platform:
       type: number
@@ -8148,6 +8798,7 @@ VAR_OUT_PRODUCT_OPTION_CAPA:
   arithmetic: value / 10.0
   description: Outdoor unit product option capacity (based on 0.1Kw) for EHS
   hass_opts:
+    known: true
     default_platform: sensor
     device_class: power
     platform:
@@ -8162,6 +8813,7 @@ VAR_OUT_SENSOR_PFCM1:
   arithmetic: value / 10
   description: PFCM#1 element temperature
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -8176,6 +8828,7 @@ VAR_OUT_SENSOR_PIPEIN1:
   address: '0x825F'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -8189,6 +8842,7 @@ VAR_OUT_SENSOR_PIPEIN2:
   address: '0x8260'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -8202,6 +8856,7 @@ VAR_OUT_SENSOR_PIPEIN3:
   address: '0x8261'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -8215,6 +8870,7 @@ VAR_OUT_SENSOR_PIPEIN4:
   address: '0x8262'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -8228,6 +8884,7 @@ VAR_OUT_SENSOR_PIPEIN5:
   address: '0x8263'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -8241,6 +8898,7 @@ VAR_OUT_SENSOR_PIPEOUT1:
   address: '0x8264'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -8254,6 +8912,7 @@ VAR_OUT_SENSOR_PIPEOUT2:
   address: '0x8265'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -8267,6 +8926,7 @@ VAR_OUT_SENSOR_PIPEOUT3:
   address: '0x8266'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -8280,6 +8940,7 @@ VAR_OUT_SENSOR_PIPEOUT4:
   address: '0x8267'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -8293,6 +8954,7 @@ VAR_OUT_SENSOR_PIPEOUT5:
   address: '0x8268'
   arithmetic: value / 10
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -8307,6 +8969,7 @@ VAR_OUT_SENSOR_SUCTION3_1SEC:
   arithmetic: value / 10
   description: Suction3 temperature
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -8321,6 +8984,7 @@ VAR_OUT_SENSOR_TOTAL_SUCTION:
   arithmetic: value / 10.0
   description: Total Suction Sensor
   hass_opts:
+    known: false
     default_platform: sensor
     device_class: temperature
     platform:
@@ -8337,6 +9001,7 @@ enum:
     0: 'OFF'
     1: 'ON'
   hass_opts:
+    known: true
     default_platform: binary_sensor
     platform:
       payload_off: 'OFF'
@@ -8350,6 +9015,7 @@ NASA_EHSSENTINEL_DAILY_MINUTES_ACTIVE:
   address: '0x9975'
   description: Current Day Minutes Active
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8364,6 +9030,7 @@ NASA_EHSSENTINEL_DAILY_GENERATED_POWER:
   address: '0x9976'
   description: Current Day Generated Power
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8378,6 +9045,7 @@ NASA_EHSSENTINEL_DAILY_CONSUMED_POWER:
   address: '0x9977'
   description: Current Day Consumed Power
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8392,6 +9060,7 @@ NASA_EHSSENTINEL_TOTAL_MINUTES_ACTIVE_DHW_MODE:
   address: '0x9978'
   description: Total Minutes Active in DHW Mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8406,6 +9075,7 @@ NASA_EHSSENTINEL_TOTAL_MINUTES_ACTIVE_HEAT_MODE:
   address: '0x9979'
   description: Total Minutes Active in Heat Mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8420,6 +9090,7 @@ NASA_EHSSENTINEL_DAILY_MINUTES_ACTIVE_DHW_MODE:
   address: '0x9980'
   description: Current Day Minutes Active in DHW Mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8434,6 +9105,7 @@ NASA_EHSSENTINEL_DAILY_MINUTES_ACTIVE_HEAT_MODE:
   address: '0x9981'
   description: Current Day Minutes Active in Heat Mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8448,6 +9120,7 @@ NASA_EHSSENTINEL_TOTAL_CONSUMED_POWER_DHW_MODE:
   address: '0x9982'
   description: Total Consumed Power in DHW Mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8462,6 +9135,7 @@ NASA_EHSSENTINEL_TOTAL_CONSUMED_POWER_HEAT_MODE:
   address: '0x9983'
   description: Total Consumed Power in Heat Mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8476,6 +9150,7 @@ NASA_EHSSENTINEL_DAILY_CONSUMED_POWER_DHW_MODE:
   address: '0x9984'
   description: Current Day Consumed Power in DHW Mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8490,6 +9165,7 @@ NASA_EHSSENTINEL_DAILY_CONSUMED_POWER_HEAT_MODE:
   address: '0x9985'
   description: Current Day Consumed Power in Heat Mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8504,6 +9180,7 @@ NASA_EHSSENTINEL_TOTAL_GENERATED_POWER_DHW_MODE:
   address: '0x9986'
   description: Total Generated Power in DHW Mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8518,6 +9195,7 @@ NASA_EHSSENTINEL_TOTAL_GENERATED_POWER_HEAT_MODE:
   address: '0x9987'
   description: Total Generated Power in Heat Mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8532,6 +9210,7 @@ NASA_EHSSENTINEL_DAILY_GENERATED_POWER_DHW_MODE:
   address: '0x9988'
   description: Current Day Generated Power in DHW Mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8546,6 +9225,7 @@ NASA_EHSSENTINEL_DAILY_GENERATED_POWER_HEAT_MODE:
   address: '0x9989'
   description: Current Day Generated Power in Heat Mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8560,6 +9240,7 @@ NASA_EHSSENTINEL_TOTAL_COP_DHW_MODE:
   address: '0x9990'
   description: Total COP in DHW Mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8573,6 +9254,7 @@ NASA_EHSSENTINEL_TOTAL_COP_HEAT_MODE:
   address: '0x9991'
   description: Total COP in Heat Mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8586,6 +9268,7 @@ NASA_EHSSENTINEL_DAILY_COP:
   address: '0x9992'
   description: Current day COP
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8599,6 +9282,7 @@ NASA_EHSSENTINEL_DAILY_COP_DHW_MODE:
   address: '0x9993'
   description: Current day COP in DHW Mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8612,6 +9296,7 @@ NASA_EHSSENTINEL_DAILY_COP_HEAT_MODE:
   address: '0x9994'
   description: Current day COP in Heat Mode
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8625,6 +9310,7 @@ NASA_EHSSENTINEL_CURRENT_TARGET_FLOW_TEMP:
   address: '0x9995'
   description: Current Target Flow Temp, calculated from outdoor temp and heating curve and offset
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8639,6 +9325,7 @@ NASA_EHSSENTINEL_DEFROST_COUNTER:
   address: '0x9996'
   description: Defrost counter of the heat pump
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8652,6 +9339,7 @@ NASA_EHSSENTINEL_START_COUNTER:
   address: '0x9997'
   description: Start counter of the heat pump
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8665,6 +9353,7 @@ NASA_EHSSENTINEL_COP:
   address: '0x9998'
   description: Current COP
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8678,6 +9367,7 @@ NASA_EHSSENTINEL_HEAT_OUTPUT:
   address: '0x9999'
   description: Current generated Heat Output
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
@@ -8692,6 +9382,7 @@ NASA_EHSSENTINEL_TOTAL_COP:
   address: '0x9997'
   description: Total COP of lifetime
   hass_opts:
+    known: true
     default_platform: sensor
     platform:
       type: number
