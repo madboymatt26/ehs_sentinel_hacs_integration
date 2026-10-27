@@ -2,9 +2,9 @@
 
 ## Source and release policy
 
-Upstream baseline: `echoDaveD/ehs_sentinel_hacs_integration` tag `v2.0.2`,
-commit `af4783c8aaae8b0be80cdc8a1cea0b73f973fe32`. The source snapshot was
-compared with that baseline; unchanged files differ only in line endings.
+Current upstream baseline: `echoDaveD/ehs_sentinel_hacs_integration` tag
+`v2.1.2`, commit `95d14284c61561a167062c053c3f88c7161b051c`. The original
+fork baseline was v2.0.2 (`af4783c8aaae8b0be80cdc8a1cea0b73f973fe32`).
 The original abbreviated upstream LICENSE is retained verbatim.
 
 `sunhaven/main` is the reviewed source of fork releases. `main` remains an
@@ -27,7 +27,7 @@ baseline and tests. Never move a release tag or auto-deploy a moving branch.
 
 ## Taking upstream updates
 
-The 2.1.3 candidate normally merges upstream v2.1.2 (95d1428), including
+Version 2.1.3 normally merges upstream v2.1.2 (95d1428), including
 2.1.0 known-entity/polling improvements and 2.1.1/2.1.2 fault handling. It retains
 the fork's receipt-correlated acknowledgements, event-loop freshness timer and
 recorder/statistics changes. Existing entries missing `only_known_entities`
@@ -38,7 +38,9 @@ First valid values enable only integration-disabled entries. The legacy
 with source-class routing before freshness validation. Invalid `ffff` outdoor
 payloads cannot refresh availability, publish a fault or acknowledge a request.
 Malformed nested polling configuration is rejected before starting a poll loop.
-This candidate requires dual-version CI and review before release/installation.
+The reviewed merge passed 89 tests independently on HA 2026.6.1 and 2026.9.4.
+Every release commit still requires exact-commit CI before tagging; installation
+and restart require separately authorized maintenance.
 
 Version 2.0.5 retains per-register receipt clocks live, but declares only
 `nasa_last_seen` unrecorded using Home Assistant's supported entity metadata.
