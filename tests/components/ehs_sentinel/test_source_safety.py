@@ -657,7 +657,7 @@ async def test_repeated_decode_errors_are_throttled_and_do_not_refresh(co, caplo
 async def test_real_entity_platform_enables_first_receipt_and_preserves_id(hass, co):
     import logging
     from homeassistant.helpers import entity_registry as er
-    from homeassistant.helpers.entity_component import EntityComponent
+    from homeassistant.helpers.entity_platform import EntityPlatform
     co.config_entry.add_to_hass(hass)
     name = 'NASA_INDOOR_DHW_CURRENT_TEMP'
     key = co.processor._normalize_name(name)
@@ -666,7 +666,10 @@ async def test_real_entity_platform_enables_first_receipt_and_preserves_id(hass,
     registry = er.async_get(hass)
     record = registry.async_get_or_create('sensor', 'ehs_sentinel', entity.unique_id,
         config_entry=co.config_entry, disabled_by=er.RegistryEntryDisabler.INTEGRATION)
-    component = EntityComponent(logging.getLogger(__name__), 'sensor', hass)
+    component = EntityPlatform(hass=hass, logger=logging.getLogger(__name__),
+        domain='sensor', platform_name='ehs_sentinel', platform=None,
+        scan_interval=timedelta(seconds=30), entity_namespace=None)
+    component.config_entry = co.config_entry
     await component.async_add_entities([entity])
     assert entity.entity_id == record.entity_id
     assert hass.states.get(record.entity_id) is None
@@ -684,4 +687,4 @@ async def test_real_entity_platform_enables_first_receipt_and_preserves_id(hass,
     assert registry.async_get(record.entity_id).disabled_by is None
     assert hass.states.get(record.entity_id).state == '45.0'
     assert hass.states.get(record.entity_id).attributes['source_fresh'] is True
-    await component.async_remove_entity(record.entity_id)
+    await component.async_reset()
