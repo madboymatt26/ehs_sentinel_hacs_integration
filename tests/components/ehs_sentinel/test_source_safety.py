@@ -43,7 +43,7 @@ async def test_receipt_clock_stays_live_but_does_not_duplicate_recorder_attribut
     import json
     import logging
     from homeassistant.components.recorder.const import SupportedDialect
-    from homeassistant.components.recorder.db_schema import StateAttributes
+    from homeassistant.components.recorder.db_schema import StateAttributes, States
     from homeassistant.core import Event
     from homeassistant.helpers.entity_component import EntityComponent
 
@@ -84,7 +84,13 @@ async def test_receipt_clock_stays_live_but_does_not_duplicate_recorder_attribut
     entity.async_write_ha_state()
     stale = hass.states.get(entity.entity_id)
     assert stale.state == 'unavailable'
-    assert json.loads(recorded(stale))['source_fresh'] is False
+    # HA drops extra entity attributes while unavailable; the recorded state
+    # transition, rather than a missing extra attribute, preserves the outage.
+    assert entity.extra_state_attributes['source_fresh'] is False
+    assert States.from_event(Event('state_changed', {
+        'entity_id': entity.entity_id, 'new_state': stale, 'old_state': current,
+    })).state == 'unavailable'
+    assert 'nasa_last_seen' not in json.loads(recorded(stale))
     await component.async_remove_entity(entity.entity_id)
 
 ROOT = Path(__file__).resolve().parents[3]
