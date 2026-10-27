@@ -493,6 +493,31 @@ def test_existing_entry_keeps_all_entities_without_implicit_filter(co):
     assert co.processor.search_nasa_table('0x0202', 'WiredRemote') is None
 
 
+def test_explicit_known_only_setup_keeps_heating_measurements(hass, co):
+    config = dict(ip='127.0.0.1', port=1234, name='Known only', write_mode=True,
+        polling=True, extended_logging=False, diagnostic_logs=False,
+        force_refresh=False, only_known_entities=True,
+        polling_yaml='fetch_interval: []\ngroups: {}')
+    filtered = EHSSentinelCoordinator(hass,
+        MockConfigEntry(domain='ehs_sentinel', title='Known only'), config, co.nasa_repo)
+    assert filtered.only_known_entities is True
+    assert filtered.processor._normalize_name('ENUM_AD_MULTI_TENANT_NO') not in filtered.data['sensor']
+    for name in ['NASA_INDOOR_DHW_CURRENT_TEMP', 'NASA_INDOOR_WATER_IN_TEMP',
+                 'NASA_INDOOR_WATER_OUT_TEMP', 'NASA_OUTDOOR_OUT_TEMP',
+                 'NASA_OUTDOOR_CONTROL_WATTMETER_ALL_UNIT']:
+        assert filtered.processor._normalize_name(name) in filtered.data['sensor']
+        assert filtered.should_process_nasa_name(name)
+    filtered.producer.writer = None
+
+
+async def test_added_fsv_pump_enum_decodes_without_command_or_identity_change(co):
+    name = 'ENUM_IN_FSV_4051'
+    value = await co.determine_value(bytes([3]), name, 0)
+    assert value == '70%'
+    assert '70%' in co.nasa_repo[name]['hass_opts']['platform']['options']
+    co.producer.writer.write.assert_not_called()
+
+
 @pytest.mark.parametrize('source,name,value', [
     (AddressClassEnum.Indoor, 'NASA_ERROR_CODE1', 101),
     (AddressClassEnum.Outdoor, 'NASA_ERROR_CODE1_OUTDOOR', 202),
