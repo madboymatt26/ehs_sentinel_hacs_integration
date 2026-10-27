@@ -27,6 +27,15 @@ baseline and tests. Never move a release tag or auto-deploy a moving branch.
 
 ## Taking upstream updates
 
+Version 2.0.5 retains per-register receipt clocks live, but declares only
+`nasa_last_seen` unrecorded using Home Assistant's supported entity metadata.
+This allows recorder attribute deduplication while keeping actual values,
+availability and source-freshness failures in history. It does not suppress
+state publication or claim that every unchanged-state row disappears. Five
+read-only flow/return/outdoor/cylinder-temperature and instantaneous-power
+sensors now declare measurement statistics, with unchanged IDs and units.
+No command, polling interval, freshness budget or write prerequisite changes.
+
 1. Fetch upstream into the upstream mirror, keeping maintained history intact.
 2. Create an update branch from `sunhaven/main` and merge the desired upstream
    commit normally. Resolve conflicts without dropping freshness/write checks.

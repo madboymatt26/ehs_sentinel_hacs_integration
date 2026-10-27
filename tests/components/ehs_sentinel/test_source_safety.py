@@ -21,6 +21,78 @@ from custom_components.ehs_sentinel.select import EHSSentinelSelect
 from custom_components.ehs_sentinel.switch import EHSSentinelSwitch
 from custom_components.ehs_sentinel.binary_sensor import EHSSentinelBinarySensor
 
+
+@pytest.mark.parametrize('name,unit', [
+    ('NASA_INDOOR_DHW_CURRENT_TEMP', '°C'),
+    ('NASA_INDOOR_WATER_IN_TEMP', '°C'),
+    ('NASA_INDOOR_WATER_OUT_TEMP', '°C'),
+    ('NASA_OUTDOOR_OUT_TEMP', '°C'),
+    ('NASA_OUTDOOR_CONTROL_WATTMETER_ALL_UNIT', 'kW'),
+])
+def test_history_measurements_opt_in_without_changing_units_or_identity(co, name, unit):
+    key = co.processor._normalize_name(name)
+    entity = EHSSentinelSensor(co, key, nasa_name=name)
+    assert entity.state_class == 'measurement'
+    assert entity.native_unit_of_measurement == unit
+    assert co.nasa_repo[name]['hass_opts']['writable'] is False
+    assert key.lower() in entity.unique_id.lower()
+
+
+async def test_receipt_clock_stays_live_but_does_not_duplicate_recorder_attributes(hass, co):
+    """Use actual entity publication and HA recorder attribute serialization."""
+    import json
+    import logging
+    from homeassistant.components.recorder.const import SupportedDialect
+    from homeassistant.components.recorder.db_schema import StateAttributes, States
+    from homeassistant.core import Event
+    from homeassistant.helpers.entity_component import EntityComponent
+
+    name = 'NASA_INDOOR_DHW_CURRENT_TEMP'
+    key = co.processor._normalize_name(name)
+    clock, stamp = SourceEvidence.clock()
+    co.source_evidence.record(name, clock, co.source_evidence.epoch, stamp)
+    co.data['sensor'][key].update(value=45.0, nasa_last_seen=stamp, seen_once=True)
+    entity = EHSSentinelSensor(co, key, nasa_name=name)
+    component = EntityComponent(logging.getLogger(__name__), 'sensor', hass)
+    await component.async_add_entities([entity])
+    first = hass.states.get(entity.entity_id)
+    assert first.attributes['nasa_last_seen'] == stamp
+    assert first.attributes['source_fresh'] is True
+    assert first.attributes['state_class'] == 'measurement'
+
+    def recorded(state):
+        event = Event('state_changed', {'entity_id': entity.entity_id, 'new_state': state,
+                                       'old_state': None})
+        return StateAttributes.shared_attrs_bytes_from_event(event, SupportedDialect.SQLITE)
+
+    initial_recorded = recorded(first)
+    assert 'nasa_last_seen' not in json.loads(initial_recorded)
+    assert json.loads(initial_recorded)['source_fresh'] is True
+    clock, new_stamp = SourceEvidence.clock()
+    assert new_stamp != stamp
+    co.source_evidence.record(name, clock, co.source_evidence.epoch, new_stamp)
+    co.data['sensor'][key]['nasa_last_seen'] = new_stamp
+    entity.async_write_ha_state()
+    current = hass.states.get(entity.entity_id)
+    assert current.attributes['nasa_last_seen'] == new_stamp
+    assert recorded(current) == initial_recorded
+
+    co.data['sensor'][key]['value'] = 46.0
+    entity.async_write_ha_state()
+    assert float(hass.states.get(entity.entity_id).state) == 46.0
+    co.set_transport(False)
+    entity.async_write_ha_state()
+    stale = hass.states.get(entity.entity_id)
+    assert stale.state == 'unavailable'
+    # HA drops extra entity attributes while unavailable; the recorded state
+    # transition, rather than a missing extra attribute, preserves the outage.
+    assert entity.extra_state_attributes['source_fresh'] is False
+    assert States.from_event(Event('state_changed', {
+        'entity_id': entity.entity_id, 'new_state': stale, 'old_state': current,
+    })).state == 'unavailable'
+    assert 'nasa_last_seen' not in json.loads(recorded(stale))
+    await component.async_remove_entity(entity.entity_id)
+
 ROOT = Path(__file__).resolve().parents[3]
 CURVE = 'VAR_IN_TEMP_WATER_LAW_TARGET_F'
 DHW = 'NASA_INDOOR_DHW_SET_TEMP'

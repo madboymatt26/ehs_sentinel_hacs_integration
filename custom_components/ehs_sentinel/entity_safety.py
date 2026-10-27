@@ -4,6 +4,11 @@ from homeassistant.exceptions import HomeAssistantError
 
 
 class SourceSafeEntity:
+    # Keep the authoritative receipt clock live for safety checks, but do not
+    # create a unique recorder attribute dictionary for each unchanged receipt.
+    # Availability/source_fresh transitions remain recorded.
+    _unrecorded_attributes = frozenset({'nasa_last_seen'})
+
     @property
     def available(self):
         data = next((items[self._key] for items in self.coordinator.data.values()

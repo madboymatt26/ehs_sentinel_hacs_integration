@@ -2896,6 +2896,7 @@ NASA_INDOOR_DHW_CURRENT_TEMP:
   hass_opts:
     default_platform: sensor
     device_class: temperature
+    state_class: measurement
     platform:
       type: number
       mode: slider
@@ -3066,6 +3067,7 @@ NASA_INDOOR_WATER_IN_TEMP:
   hass_opts:
     default_platform: sensor
     device_class: temperature
+    state_class: measurement
     platform:
       type: number
       mode: slider
@@ -3080,6 +3082,7 @@ NASA_INDOOR_WATER_OUT_TEMP:
   hass_opts:
     default_platform: sensor
     device_class: temperature
+    state_class: measurement
     platform:
       type: number
       mode: slider
@@ -3795,6 +3798,7 @@ NASA_OUTDOOR_CONTROL_WATTMETER_ALL_UNIT:
   hass_opts:
     default_platform: sensor
     device_class: power
+    state_class: measurement
     platform:
       type: number
       mode: slider
@@ -4929,6 +4933,7 @@ NASA_OUTDOOR_OUT_TEMP:
   hass_opts:
     default_platform: sensor
     device_class: temperature
+    state_class: measurement
     platform:
       type: number
       mode: slider
