@@ -5,7 +5,16 @@
 Maintained branch: `sunhaven/main`. Upstream `main` is retained as a mirror of
 [echoDaveD's original project](https://github.com/echoDaveD/ehs_sentinel_hacs_integration).
 The original project, author attribution and license notice remain below/in
-the repository. Release **2.0.3** is a fork release, not an upstream release.
+the repository. The published fork release is **2.0.5**. This review branch
+prepares **2.1.3**, incorporating upstream **2.1.2** without dropping the fork's
+safety and history fixes. It is not yet a published or deployed release.
+
+Existing installations retain all entity IDs and their previous filtering
+behavior. New installations default to processing known entities only; existing
+installations can opt in. Filtering never deletes registry entries or reverses
+a user's disabled-entity choice. New unseen entities remain integration-disabled
+until a valid first receipt. The original indoor error-code entity keeps its ID;
+the separately routed outdoor error-code entity is additive.
 
 This fork adds per-register/current-connection freshness, restore-safe
 availability, source-correlated confirmed writes, bounded transport handling,

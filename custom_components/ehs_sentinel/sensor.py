@@ -6,7 +6,9 @@ from .entity_safety import SourceSafeEntity
 
 async def async_setup_entry(hass, entry, async_add_entities):
     coordinator = hass.data[DOMAIN][entry.entry_id]
-    coordinator.register_entity_adder(PLATFORM_SENSOR, async_add_entities)
+    coordinator.register_entity_adder(
+        PLATFORM_SENSOR, async_add_entities, EHSSentinelSensor
+    )
     await coordinator.async_config_entry_first_refresh()
     entities = []
     for key, value in coordinator.data.get(PLATFORM_SENSOR, {}).items():
@@ -41,7 +43,7 @@ class EHSSentinelSensor(SourceSafeEntity, CoordinatorEntity, SensorEntity, Resto
         self._device_class = hass_opts.get("device_class", None)
         self._state_class = hass_opts.get("state_class", None)
         self._unit = hass_opts.get("unit", None)
-        self._attr_entity_registry_enabled_default = hass_opts.get("entity_registry_enabled_default", True)
+        self._attr_entity_registry_enabled_default = bool(coordinator.data.get(PLATFORM_SENSOR, {}).get(key, {}).get('seen_once'))
         self._attr_entity_registry_visible_default = hass_opts.get("entity_registry_visible_default", True)
         entry = coordinator.config_entry
         
@@ -59,12 +61,15 @@ class EHSSentinelSensor(SourceSafeEntity, CoordinatorEntity, SensorEntity, Resto
 
     async def async_added_to_hass(self):
         await super().async_added_to_hass()
+        platform_data = self.coordinator.data.setdefault(PLATFORM_SENSOR, {})
+        platform_data.setdefault(self._key, {})
+        platform_data[self._key].pop("_entity_add_pending", None)
+        if platform_data[self._key].get("seen_once", False):
+            return
+
         last_state = await self.async_get_last_state()
         if last_state and not self.coordinator.data.get(PLATFORM_SENSOR, {}).get(self._key, {}).get('seen_once'):
             # Schreibe den wiederhergestellten Wert in den Coordinator, damit er sofort verfügbar ist
-            platform_data = self.coordinator.data.setdefault(PLATFORM_SENSOR, {})
-            platform_data.setdefault(self._key, {})
-
             state_val = last_state.state
             # sichere Konvertierung: "unknown", "unavailable" oder leere Werte -> None
             if state_val is None or (isinstance(state_val, str) and state_val.lower() in ("unknown", "unavailable", "")):

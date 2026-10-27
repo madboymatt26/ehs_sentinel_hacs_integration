@@ -1,9 +1,10 @@
 # Maintained EHS Sentinel fork
 
 Source of this component: `madboymatt26/ehs_sentinel_hacs_integration`, maintained
-branch `sunhaven/main`. Fork release: **2.0.4**. Upstream baseline:
-`echoDaveD/ehs_sentinel_hacs_integration` tag `v2.0.2`, commit
-`af4783c8aaae8b0be80cdc8a1cea0b73f973fe32`, by echoDaveD.
+branch `sunhaven/main`. Fork candidate: **2.1.3** (not yet released).
+Upstream merge baseline: `echoDaveD/ehs_sentinel_hacs_integration` tag
+`v2.1.2`, commit `95d1428`, by echoDaveD. The fork's original baseline was
+v2.0.2 (`af4783c8aaae8b0be80cdc8a1cea0b73f973fe32`).
 
 The adjacent LICENSE reproduces upstream's abbreviated notice verbatim.
 Upstream attribution, domain and stable naming/unique IDs are preserved.
@@ -12,6 +13,11 @@ resilient polling; they are not claimed to exist in upstream 2.0.2. Version
 2.0.4 also marks periodic freshness publication as an event-loop callback;
 2.0.3 failed real interval dispatch and must not be deployed.
 See the fork's MAINTENANCE.md and immutable release for provenance/tests.
+
+The 2.1.3 candidate merges upstream known-entity/polling/fault improvements
+with migration safeguards preserving legacy identities and registry entries.
+It retains 2.0.5's live receipt clocks/unrecorded metadata and five measurement
+statistics sensors. No installation or restart is part of this merge.
 
 No house configuration, credentials, account storage, packet logs or FSV
 backups are included. Publication is not physical commissioning or permission
